@@ -1,0 +1,23 @@
+{% extends 'ticket_and_review/base.html' %}
+{% block content %}
+
+<form method="post">
+     <div class="ticket_review">
+            <p class="left_btn"><a href="{% url 'blog_create' %}"><button type="button" name='ticket'>Demander une critique</button></a></p>
+            <p class="right_btn"><a href="{% url 'signup' %}"><button type="button" name='review'>Créer une critique</button></a></p>
+     </div>
+    {% csrf_token %}
+     <div class="grid-container">
+        {% for blog in blogs %}
+            <div class="post">
+                    <p>{{ blog.author }}</p>
+                    <h4>Billet : {{ blog.title }}</h4>
+                    <p class="date">{{ blog.date_created }}</p>
+                    <p class="content">{{ blog.description }}</p>
+                    <img src="{{ blog.photo.image.url }}">
+            </div>
+
+        {% endfor %}
+    </div>
+</form>
+{% endblock content %}

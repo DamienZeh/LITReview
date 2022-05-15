@@ -1,0 +1,6 @@
+{% extends 'ticket_and_review/base.html' %}
+{% block content %}
+    <h2>{{ blog.title }}</h2>
+    <img src="{{ blog.photo.image.url }}">
+    <p>{{ blog.description }}</p>
+{% endblock content %}

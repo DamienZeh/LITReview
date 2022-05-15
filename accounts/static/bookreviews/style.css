@@ -1,0 +1,171 @@
+*{
+  font-family:"Verdana", "Arial", "Arial Black", Arial, Verdana, sans-serif;
+  color: black;
+  text-decoration: none;
+}
+body
+{
+    background-image: linear-gradient(to bottom right, rgb(150,178,174), rgb(49,58,57));
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+a{
+  color: white;
+  font-size: 22px;
+}
+
+/* MENU */
+nav {
+    padding-left: 0px;
+    z-index: 2;
+    position: relative;
+    width: 100%;
+    height: 70px;
+    background: linear-gradient(90deg, rgb(35, 18, 8),  rgb(99, 84, 77), #1f1f1f);
+    color: white;
+    border-radius: 20px;
+}
+.liste-objets #nom {
+    color: white;
+    padding-right: 30px;
+    font-size: 22px;
+    margin-top: 8px;
+}
+.liste-objets img {
+    height: 40px;
+    padding-right: 20px;
+    vertical-align: middle;
+    margin-top: 12px;
+}
+.liste-objets {
+    display: block;
+    display:flex;
+    margin-left: auto;
+    margin-right: auto;
+    list-style-type: none;
+    height: 100%;
+    line-height: 50px;
+    font-size: 20px;
+    justify-content: center;
+    vertical-align: center;
+}
+/* FIN MENU */
+
+/* login page & other */
+.connexion{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    background-color: rgba(220, 221, 222, 0.6);
+    justify-content: center;
+    display:flex;
+    max-width: 650px;
+    border-radius: 15px;
+    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.1);
+    border:  1mm solid rgba(250, 250, 250);
+}
+.connexion input{
+    font-size: 16px;
+    width: 210px;
+    height: 35px;
+    text-align: center;
+    border:  0.7mm solid rgb(130, 94, 40);
+}
+.connexion button, .signup button {
+    color: black;
+    font-size: 14px;
+    width: 120px;
+    height: 35px;
+    border-radius: 7px;
+    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.1);
+    border:  0.9mm solid  rgb(110, 44, 6);
+    cursor: pointer;
+    text-align: center;
+}
+.connexion button:hover, .signup button:hover{
+    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.4), 0 6px 20px 0 rgba(0,0,0,0.25);
+    background-color: black;
+    border:  0.9mm solid  rgb(102, 2, 28);
+    color: white;
+}
+.subscribe{
+    padding:40px 30px 0px 30px;
+    text-align: center;
+    margin: 10px;
+    max-width: 250px;
+}
+.ids{
+    padding:5px 30px 10px 30px;
+    margin: 10px;
+    max-width: 250px;
+    text-align: right;
+}
+.ids p{
+    text-align: center;
+    margin-right:30px;
+}
+.ids input{
+    margin-right:20px;
+}
+.trait{
+    margin: 30px;
+    width:464px;
+    height:1px;
+    overflow:hidden;
+    background-color: white;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    display:flex;
+}
+.errorlist{
+    text-align: left;
+    overflow:hidden;
+    font-weight: bold;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    color:black;
+    font-size: 17px
+}
+/* Fin login page & other */
+
+/* signup page */
+.signup{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    margin-bottom: 100px;
+    background-color: rgba(220, 221, 222, 0.6);
+    justify-content: center;
+    display:flex;
+    max-width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.1);
+    border:  1mm solid rgba(250, 250, 250);
+}
+.signup input{
+    font-size: 16px;
+    width: 253px;
+    height: 35px;
+    text-align: center;
+    border:  0.7mm solid rgb(130, 94, 40);
+}
+.connexion_ids{
+    padding:5px 80px 10px 80px;
+    margin: 10px;
+    max-width: 250px;
+    text-align: center;
+}
+.connexion_btn{
+    justify-content: center;
+    display:flex;
+    margin-left:60px;
+}
+.connexion_btn button,a{
+    padding-right: 10px;
+}
+/* Fin signup page */

@@ -1,0 +1,23 @@
+{% extends 'accounts/base.html' %}
+{% block content %}
+{% if form.errors %}
+   {{ form.errors }}
+{% endif %}
+<div class="errorlist">{{ message }}</div>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="connexion">
+        <div class="subscribe">
+             <p>Inscrivez-vous maintenant</p>
+            <a href="{% url 'signup' %}"><button type="button" name='back_main'>S'inscrire</button></a>
+        </div>
+        <div class="ids">
+            <p>Connectez-vous</p>
+            <p>{{ form.username }}</p>
+            <p>{{ form.password }}</p>
+             <button type="submit" >Se connecter</button>
+        </div>
+    </div>
+</form>
+{% endblock content %}

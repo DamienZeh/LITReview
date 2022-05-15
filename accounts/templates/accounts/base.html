@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="fr">
+    <head>
+        <title>LITReview</title>
+        <link rel="stylesheet" href="{% static 'bookreviews/style.css' %}">
+    </head>
+    <body>
+        <header>
+            <!-- MENU-->
+            <nav>
+                <ul class="liste-objets">
+                    <li id="logo"><img src="{% static 'bookreviews/logo_orange.png' %}" alt="logo"></li>
+                    <li id="nom">LITReview</li>
+                </ul>
+            </nav>
+         </header>
+        <div class="trait"><hr></div>
+        {% block content %}{% endblock content %}
+        {% if user.is_authenticated %}
+        {% endif %}
+        <div class="trait"><hr></div>
+    </body>
+</html>

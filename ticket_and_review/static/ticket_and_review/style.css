@@ -1,0 +1,172 @@
+*{
+  font-family:"Verdana", "Arial", "Arial Black", Arial, Verdana, sans-serif;
+  text-decoration: none;
+}
+body
+{
+    background-image: linear-gradient(to bottom right, rgb(150,178,174), rgb(49,58,57));
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+a{
+  color: white;
+  font-size: 22px;
+}
+
+/* MENU */
+nav {
+    padding-left: 0px;
+    z-index: 2;
+    position: relative;
+    width: 100%;
+    height: 70px;
+    background: linear-gradient(90deg, rgb(35, 18, 8),  rgb(99, 84, 77), #1f1f1f);
+    color: white;
+    border-radius: 20px;
+}
+.liste-objets #nom {
+    color: white;
+    padding-right: 30px;
+    font-size: 22px;
+    margin-top: 8px;
+}
+.liste-objets img {
+    height: 40px;
+    padding-right: 20px;
+    vertical-align: middle;
+    margin-top: 12px;
+}
+.liste-objets {
+    display: block;
+    display:flex;
+    margin-left: auto;
+    margin-right: auto;
+    list-style-type: none;
+    height: 100%;
+    line-height: 50px;
+    font-size: 20px;
+    justify-content: center;
+    vertical-align: center;
+}
+.liste-objets a{
+    font-size: 15px;
+}
+.liste-objets #espace{
+    width:20px;
+    padding-right: 30px;
+}
+.objets {
+    cursor: pointer;
+    margin-top: 8px;
+    flex-shrink: 0;
+    margin-left: 70px;
+    position: relative;
+}
+/* FIN MENU */
+
+/* flux page & other */
+#id_connect {
+    text-align: right;
+    margin-right: 70px;
+    color: white;
+}
+.trait{
+    margin: 40px;
+    width:464px;
+    height:1px;
+    overflow:hidden;
+    background-color: white;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    display:flex;
+}
+.errorlist{
+    text-align: left;
+    overflow:hidden;
+    font-weight: bold;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    color:black;
+    font-size: 17px
+}
+.ticket_review button{
+    color: black;
+    font-size: 14px;
+    width: 210px;
+    height: 35px;
+    border-radius: 7px;
+    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.1);
+    border:  0.9mm solid  rgb(110, 44, 6);
+    cursor: pointer;
+    text-align: center;
+}
+.ticket_review button:hover{
+    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.4), 0 6px 20px 0 rgba(0,0,0,0.25);
+    background-color: black;
+    border:  0.9mm solid  rgb(102, 2, 28);
+    color: white;
+}
+.ticket_review{
+    justify-content: center;
+    display:flex;
+}
+.ticket_review .left_btn{
+    padding-right: 50px;
+}
+.ticket_review .right_btn{
+    padding-left: 50px;
+}
+.post {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px 20px 5px 20px;
+    border-radius: 7px;
+    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+    margin-top: 10px;
+    background-image: linear-gradient(to bottom right, white, rgb(208,213,212));
+}
+.post .date {
+    text-align: right;
+    margin: 0;
+    font-size: 1em;
+}
+.post .content {
+    margin-top: 0px;
+}
+.post h4 {
+    margin-bottom: 0;
+}
+.post img {
+    margin-bottom: 5px;
+}
+.publish {
+   text-align:right;
+   margin-bottom: 5px;
+}
+.btn{
+    color: black;
+    font-size: 14px;
+    width: 110px;
+    height: 35px;
+    border-radius: 7px;
+    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.1);
+    border:  0.9mm solid  rgb(110, 44, 6);
+    cursor: pointer;
+    text-align: center;
+}
+.btn:hover{
+    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.4), 0 6px 20px 0 rgba(0,0,0,0.25);
+    background-color: black;
+    border:  0.9mm solid  rgb(102, 2, 28);
+    color: white;
+}
+.post h2 {
+    text-align: center;
+}
+/* Fin flux page & other */
