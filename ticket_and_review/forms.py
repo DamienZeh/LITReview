@@ -16,6 +16,10 @@ class PhotoForm(forms.ModelForm):
 
 
 class BlogForm(forms.ModelForm):
+    title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
+                           'placeholder': 'Titre du livre + auteur'}))
+    description = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'form-control',
+                           'placeholder': 'Pas obligatoire pour une demande.'}))
     edit_blog = forms.BooleanField(widget=forms.HiddenInput, initial=True)
 
     class Meta:

@@ -134,10 +134,12 @@ nav {
 .post .date {
     text-align: right;
     margin: 0;
-    font-size: 1em;
+    margin-bottom: 15px;
+    font-size: 0.9em;
 }
 .post .content {
     margin-top: 0px;
+    overflow: hidden;
 }
 .post h4 {
     margin-bottom: 0;

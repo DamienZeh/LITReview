@@ -1,9 +1,21 @@
 {% extends 'ticket_and_review/base.html' %}
 {% block content %}
-<h1>Test posts</h1>
 
 <form method="post">
     {% csrf_token %}
-     {{ form.as_p }}
+     <div class="grid-container">
+        {% for blog in blogs %}
+             {% if blog.author == request.user %}
+                <div class="post">
+                        <p>Vous avez publié un ticket</p>
+                        <h4>{{ blog.title }}</h4>
+                        <p class="date">{{ blog.date_created }}</p>
+                        <p class="content">{{ blog.description | safe }}</p>
+                        <img src="{{ blog.photo.image.url }}">
+                </div>
+             {% endif %}
+
+        {% endfor %}
+    </div>
 </form>
 {% endblock content %}

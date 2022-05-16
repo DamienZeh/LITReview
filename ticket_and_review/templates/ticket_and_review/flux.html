@@ -9,13 +9,17 @@
     {% csrf_token %}
      <div class="grid-container">
         {% for blog in blogs %}
-            <div class="post">
-                    <p>{{ blog.author }}</p>
-                    <h4>Billet : {{ blog.title }}</h4>
+                <div class="post">
+                    {% if blog.author == request.user %}
+                        <p>Vous avez demandé une critique</p>
+                    {% else %}
+                        <p>{{ blog.author }} a demandé une critique</p>
+                    {% endif %}
+                    <h4>{{ blog.title }}</h4>
                     <p class="date">{{ blog.date_created }}</p>
-                    <p class="content">{{ blog.description }}</p>
+                    <p class="content">{{ blog.description | safe }}</p>
                     <img src="{{ blog.photo.image.url }}">
-            </div>
+                </div>
 
         {% endfor %}
     </div>

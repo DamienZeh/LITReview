@@ -11,10 +11,15 @@ def view_blog(request, blog_id):
     blog = get_object_or_404(Blog, id=blog_id)
     return render(request, 'ticket_and_review/view_blog.html', {'blog': blog})
 
-@login_required #permet d'interdire l'accès, si on est pas connecté
+@login_required
 def flux_page(request):
     blogs = Blog.objects.all()
     return render(request, 'ticket_and_review/flux.html', context={'blogs': blogs})
+
+@login_required
+def posts_page(request):
+    blogs = Blog.objects.all()
+    return render(request, 'ticket_and_review/posts.html', context={'blogs': blogs})
 
 @login_required
 def photo_upload(request):
@@ -52,12 +57,7 @@ def blog_and_photo_upload(request):
         }
     return render(request, 'ticket_and_review/create_blog_post.html', context=context)
 
-@login_required #permet d'interdire l'accès, si on est pas connecté
-def posts_page(request):
-    form = None
-    return render(request, 'ticket_and_review/posts.html', context={'form': form})
-
-@login_required #permet d'interdire l'accès, si on est pas connecté
+@login_required
 def subscription_page(request):
     form = None
     return render(request, 'ticket_and_review/abonnements.html', context={'form': form})
