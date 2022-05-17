@@ -1,0 +1,15 @@
+{% extends 'ticket_and_review/base.html' %}
+{% block content %}
+    <h2 class="title">Modifier le billet</h2>
+    <form method="post">
+        <div class="grid-container">
+            <div class="post post-modif">
+                {{ edit_form.as_p }}
+                {% csrf_token %}
+                <div class="save">
+                    <button class="save-btn" type="submit" >Sauvegarder</button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock content %}

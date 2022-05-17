@@ -192,3 +192,25 @@ nav {
     text-align: center;
 }
 /* Fin posts page */
+
+/* page modif et delete ticket */
+.save-btn, .delete-btn {
+    color: black;
+    font-size: 14px;
+    width: 130px;
+    height: 35px;
+    border-radius: 7px;
+    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.1);
+    border:  0.9mm solid  rgb(110, 44, 6);
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.title {
+    text-align: center;
+    color: white;
+}
+.post-sup, .save {
+    text-align: center;
+}
+/* Fin page modif et delete ticket */

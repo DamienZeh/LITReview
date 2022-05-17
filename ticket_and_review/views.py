@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from .forms import TicketForm, ImageForm
+from .forms import TicketForm, ImageForm, DeleteTicketForm
 from .models import Ticket
 from django.shortcuts import get_object_or_404, render, redirect
 
@@ -62,3 +62,32 @@ def subscription_page(request):
     form = None
     return render(request, 'ticket_and_review/abonnements.html', context={'form': form})
 
+@login_required
+def edit_ticket(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    edit_form = TicketForm(instance=ticket)
+    if request.method == 'POST':
+        if 'edit_ticket' in request.POST:
+            edit_form = TicketForm(request.POST, instance=ticket)
+            if edit_form.is_valid():
+                edit_form.save()
+                return redirect('posts')
+    context = {
+        'edit_form': edit_form,
+        }
+    return render(request, 'ticket_and_review/edit_ticket.html', context=context)
+
+@login_required
+def delete_ticket(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    delete_form = DeleteTicketForm()
+    if request.method == 'POST':
+        if 'delete_ticket' in request.POST:
+            delete_form = DeleteTicketForm(request.POST)
+            if delete_form.is_valid():
+                ticket.delete()
+                return redirect('posts')
+    context = {
+        'delete_form': delete_form,
+        }
+    return render(request, 'ticket_and_review/delete_ticket.html', context=context)
