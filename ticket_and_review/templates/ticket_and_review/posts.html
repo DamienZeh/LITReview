@@ -4,17 +4,20 @@
 <form method="post">
     {% csrf_token %}
      <div class="grid-container">
-        {% for blog in blogs %}
-             {% if blog.author == request.user %}
+        {% for ticket in tickets %}
+             {% if ticket.user == request.user %}
                 <div class="post">
                         <p>Vous avez publié un ticket</p>
-                        <h4>{{ blog.title }}</h4>
-                        <p class="date">{{ blog.date_created }}</p>
-                        <p class="content">{{ blog.description | safe }}</p>
-                        <img src="{{ blog.photo.image.url }}">
+                        <h4>{{ ticket.title }}</h4>
+                        <p class="date">{{ ticket.time_created }}</p>
+                        <p class="content">{{ ticket.description | safe }}</p>
+                        <img src="{{ ticket.image.image.url }}">
+                        <div class="modif_sup_btn">
+                            <p class="ticket_review modif_btn"><a href="{% url 'signup' %}"><button type="button" name='review'>Modifier</button></a></p>
+                            <p class="ticket_review modif_btn"><a href="{% url 'signup' %}"><button type="button" name='review'>Supprimer</button></a></p>
+                        </div>
                 </div>
              {% endif %}
-
         {% endfor %}
     </div>
 </form>

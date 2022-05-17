@@ -1,61 +1,61 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from .forms import BlogForm, PhotoForm
-from .models import Blog
+from .forms import TicketForm, ImageForm
+from .models import Ticket
 from django.shortcuts import get_object_or_404, render, redirect
 
 
 @login_required
-def view_blog(request, blog_id):
-    blog = get_object_or_404(Blog, id=blog_id)
-    return render(request, 'ticket_and_review/view_blog.html', {'blog': blog})
+def view_ticket(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    return render(request, 'ticket_and_review/view_ticket.html', {'ticket': ticket})
 
 @login_required
 def flux_page(request):
-    blogs = Blog.objects.all()
-    return render(request, 'ticket_and_review/flux.html', context={'blogs': blogs})
+    tickets = Ticket.objects.all()
+    return render(request, 'ticket_and_review/flux.html', context={'tickets': tickets})
 
 @login_required
 def posts_page(request):
-    blogs = Blog.objects.all()
-    return render(request, 'ticket_and_review/posts.html', context={'blogs': blogs})
+    tickets = Ticket.objects.all()
+    return render(request, 'ticket_and_review/posts.html', context={'tickets': tickets})
 
 @login_required
-def photo_upload(request):
-    form = PhotoForm()
+def image_upload(request):
+    form = ImageForm()
     if request.method == 'POST':
-        form = PhotoForm(request.POST, request.FILES)
+        form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
-            photo = form.save(commit=False)
+            image = form.save(commit=False)
             # set the uploader to the user before saving the model
-            photo.uploader = request.user
+            image.uploader = request.user
             # now we can save
-            photo.save()
+            image.save()
             return redirect('flux')
-    return render(request, 'ticket_and_review/photo_upload.html', context={'form': form})
+    return render(request, 'ticket_and_review/image_upload.html', context={'form': form})
 
 @login_required
-def blog_and_photo_upload(request):
-    blog_form = BlogForm()
-    photo_form = PhotoForm()
+def ticket_and_image_upload(request):
+    ticket_form = TicketForm()
+    image_form = ImageForm()
     if request.method == 'POST':
-        blog_form = BlogForm(request.POST)
-        photo_form = PhotoForm(request.POST, request.FILES)
-        if all([blog_form.is_valid(), photo_form.is_valid()]):
-            photo = photo_form.save(commit=False)
-            photo.uploader = request.user
-            photo.save()
-            blog = blog_form.save(commit=False)
-            blog.author = request.user
-            blog.photo = photo
-            blog.save()
+        ticket_form = TicketForm(request.POST)
+        image_form = ImageForm(request.POST, request.FILES)
+        if all([ticket_form.is_valid(), image_form.is_valid()]):
+            image = image_form.save(commit=False)
+            image.uploader = request.user
+            image.save()
+            ticket = ticket_form.save(commit=False)
+            ticket.user = request.user
+            ticket.image = image
+            ticket.save()
             return redirect('flux')
     context = {
-        'blog_form': blog_form,
-        'photo_form': photo_form,
+        'ticket_form': ticket_form,
+        'image_form': image_form,
         }
-    return render(request, 'ticket_and_review/create_blog_post.html', context=context)
+    return render(request, 'ticket_and_review/create_ticket_post.html', context=context)
 
 @login_required
 def subscription_page(request):

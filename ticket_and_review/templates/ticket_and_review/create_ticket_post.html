@@ -3,8 +3,8 @@
     <div class="post">
         <h2>Créer un ticket</h2>
         <form method="post" enctype="multipart/form-data">
-            {{ blog_form.as_p }}
-            {{ photo_form.as_p }}
+            {{ ticket_form.as_p }}
+            {{ image_form.as_p }}
             {% csrf_token %}
             <div class="publish">
                 <button type="submit" class="btn">Envoyer</button>

@@ -3,24 +3,24 @@
 
 <form method="post">
      <div class="ticket_review">
-            <p class="left_btn"><a href="{% url 'blog_create' %}"><button type="button" name='ticket'>Demander une critique</button></a></p>
+            <p class="left_btn"><a href="{% url 'ticket_create' %}"><button type="button" name='ticket'>Demander une critique</button></a></p>
             <p class="right_btn"><a href="{% url 'signup' %}"><button type="button" name='review'>Créer une critique</button></a></p>
      </div>
     {% csrf_token %}
      <div class="grid-container">
-        {% for blog in blogs %}
+        {% for ticket in tickets %}
                 <div class="post">
-                    {% if blog.author == request.user %}
-                        <p>Vous avez demandé une critique</p>
+                    {% if ticket.user == request.user %}
+                        <p><strong>Vous</strong> avez demandé une critique</p>
                     {% else %}
-                        <p>{{ blog.author }} a demandé une critique</p>
+                        <p>><strong>{{ ticket.user }}</strong> a demandé une critique</p>
                     {% endif %}
-                    <h4>{{ blog.title }}</h4>
-                    <p class="date">{{ blog.date_created }}</p>
-                    <p class="content">{{ blog.description | safe }}</p>
-                    <img src="{{ blog.photo.image.url }}">
+                    <p>{{ ticket.title }}</p>
+                    <p class="date">{{ ticket.time_created }}</p>
+                    <p class="content">{{ ticket.description | safe }}</p>
+                    <img src="{{ ticket.image.image.url }}">
+                    <p class="ticket_review corner_btn"><a href="{% url 'signup' %}"><button type="button" name='review'>Créer une critique</button></a></p>
                 </div>
-
         {% endfor %}
     </div>
 </form>
