@@ -1,15 +1,26 @@
 {% extends 'ticket_and_review/base.html' %}
 {% block content %}
     <h2 class="title">Modifier le billet</h2>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div class="grid-container">
             <div class="post post-modif">
-                {{ edit_form.as_p }}
                 {% csrf_token %}
+                <div class="hide">{{ edit_form.as_p }}</div>
+                {% if edit_form.image %}
+                    <p>Titre</p>
+                    <p class="champs">{{ edit_form.title }}</p>
+                    <p>Description</p>
+                    <p class="champs">{{ edit_form.description }}</p>
+                    <p>Image</p>
+                    <img src="{{ edit_form.image.value.url }}">
+                    <div class="invisible">{{ edit_form.image }}</div>
+                {% endif %}
+                <div class="fake-btn" type="submit" ><p>Télécharger fichier</p></div>
                 <div class="save">
-                    <button class="save-btn" type="submit" >Sauvegarder</button>
+                    <button class="save-btn" type="submit" >Envoyer</button>
                 </div>
             </div>
         </div>
     </form>
 {% endblock content %}
+

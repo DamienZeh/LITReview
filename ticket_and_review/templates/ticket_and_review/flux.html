@@ -1,7 +1,7 @@
 {% extends 'ticket_and_review/base.html' %}
 {% block content %}
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
      <div class="ticket_review">
             <p class="left_btn"><a href="{% url 'ticket_create' %}"><button type="button" name='ticket'>Demander une critique</button></a></p>
             <p class="right_btn"><a href="{% url 'signup' %}"><button type="button" name='review'>Créer une critique</button></a></p>
@@ -13,12 +13,17 @@
                     {% if ticket.user == request.user %}
                         <p><strong>Vous</strong> avez demandé une critique</p>
                     {% else %}
-                        <p>><strong>{{ ticket.user }}</strong> a demandé une critique</p>
+                        <p><strong>{{ ticket.user }}</strong> a demandé une critique</p>
                     {% endif %}
                     <p>{{ ticket.title }}</p>
                     <p class="date">{{ ticket.time_created }}</p>
                     <p class="content">{{ ticket.description | safe }}</p>
-                    <img src="{{ ticket.image.image.url }}">
+                    {% if ticket.image %}
+
+                        <img src="{{ ticket.image.url }}">
+                    {% endif %}
+
+
                     <p class="ticket_review corner_btn"><a href="{% url 'signup' %}"><button type="button" name='review'>Créer une critique</button></a></p>
                 </div>
         {% endfor %}

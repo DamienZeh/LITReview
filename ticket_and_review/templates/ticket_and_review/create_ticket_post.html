@@ -4,11 +4,11 @@
         <h2>Créer un ticket</h2>
         <form method="post" enctype="multipart/form-data">
             {{ ticket_form.as_p }}
-            {{ image_form.as_p }}
             {% csrf_token %}
-            <div class="publish">
-                <button type="submit" class="btn">Envoyer</button>
-            </div>
+             <div class="fake-btn2"><p>Télécharger fichier</p></div>
+                <div class="save">
+                    <button class="save-btn" type="submit" >Envoyer</button>
+                </div>
         </form>
     </div>
 {% endblock content %}

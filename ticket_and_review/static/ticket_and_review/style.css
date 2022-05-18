@@ -12,6 +12,15 @@ a{
   color: white;
   font-size: 22px;
 }
+.hide {
+   display: none;
+}
+.invisible {
+   padding: 0px;
+   z-index: 1;
+   position: relative;
+   top: 10px;
+}
 
 /* MENU */
 nav {
@@ -194,7 +203,7 @@ nav {
 /* Fin posts page */
 
 /* page modif et delete ticket */
-.save-btn, .delete-btn {
+.save-btn, .delete-btn, .fake-btn, .fake-btn2{
     color: black;
     font-size: 14px;
     width: 130px;
@@ -210,7 +219,35 @@ nav {
     text-align: center;
     color: white;
 }
-.post-sup, .save {
+.post-sup {
     text-align: center;
+}
+.save {
+    text-align: right;
+}
+.fake-btn, .fake-btn2 {
+    position: relative;
+    top: -20px;
+    width:184px;
+    height: 30px;
+    cursor: auto;
+}
+.fake-btn p{
+    margin-top: 7px;
+}
+.fake-btn2 {
+    position: relative;
+    top: -45px;
+    left: -4px;
+    height: 30px;
+    cursor: auto;
+    pointer-events: none
+}
+.fake-btn2 p{
+    margin-top: 7px;
+}
+.django_btn {
+    opacity: 0%;
+    max-width: 180px;
 }
 /* Fin page modif et delete ticket */
