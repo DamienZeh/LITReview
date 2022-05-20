@@ -2,8 +2,11 @@
 {% block content %}
     <h2>Télécharger une image</h2>
     <form method="post" enctype="multipart/form-data">
-        {{ form.as_p }}
         {% csrf_token %}
+        {% if ticket.image %}
+            {{ ticket.as_p }}
+
+         {% endif %}
         <button type="submit" >Publier</button>
     </form>
 {% endblock content %}

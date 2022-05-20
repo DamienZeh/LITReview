@@ -15,7 +15,7 @@ class TicketForm(forms.ModelForm):
     description = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'form-control',
                            'placeholder': 'Pas obligatoire pour une demande.', 'cols': 60 }))
     edit_ticket = forms.BooleanField(widget=forms.HiddenInput, initial=True)
-    image = forms.ImageField(label='', error_messages={'invalid': "Image files only"},
+    image = forms.ImageField(label='', required=False, error_messages={'invalid': "Image files only"},
                              widget=forms.FileInput(attrs={'class': 'django_btn'}))
 
     class Meta:

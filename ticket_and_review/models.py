@@ -3,10 +3,16 @@ from django.conf import settings
 from django.db import models
 from PIL import Image as Picture
 from django import forms
+from django.contrib.auth.models import User
 
 
 class Ticket(models.Model):
-    image = models.ImageField(null=True, blank=True)
+
+    title = models.CharField(max_length=128, verbose_name='Titre')
+    description = models.TextField(max_length=5000, verbose_name='Description')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    time_created = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(null=True, verbose_name='image', blank=True)
 
     IMAGE_MAX_SIZE = (200, 200)
 
@@ -17,12 +23,8 @@ class Ticket(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        self.resize_image()
-
-    title = models.CharField(max_length=128, verbose_name='Titre')
-    description = models.TextField(max_length=5000, verbose_name='Description')
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    time_created = models.DateTimeField(auto_now_add=True)
+        if self.image:
+            self.resize_image()
 
 
 
@@ -38,13 +40,14 @@ class Review(models.Model):
     user = models.ForeignKey(
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     time_created = models.DateTimeField(auto_now_add=True)
-
+"""
 
 class UserFollows(models.Model):
     # Your UserFollows model definition goes here
-
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='following')
+    followed_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='followed_by')
+    users = User.objects.all()
     class Meta:
         # ensures we don't get multiple UserFollows instances
         # for unique user-user_followed pairs
         unique_together = ('user', 'followed_user', )
-"""

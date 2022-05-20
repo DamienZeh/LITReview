@@ -1,13 +1,17 @@
 {% extends 'ticket_and_review/base.html' %}
 {% block content %}
     <div class="post">
-        <h2>Créer un ticket</h2>
+        <h2>Suivre d'autres utilisateurs</h2>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ ticket_form.as_p }}
-             <div class="fake-btn2">
-                 <p>Télécharger fichier</p>
-             </div>
+            {{ subcription_form.as_p }}
+            {{ request.user }}
+            {{ subcription_form.users }}
+            {% for UserFollows in user.following.all %}
+                {{ request.user }}
+                {{ user }}
+            {% endfor %}
+
             <div class="save">
                 <button class="save-btn" type="submit" >Envoyer</button>
             </div>

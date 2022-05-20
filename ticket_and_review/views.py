@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from .forms import TicketForm, DeleteTicketForm
-from .models import Ticket
+from .models import Ticket, UserFollows
 from django.shortcuts import get_object_or_404, render, redirect
 
 
@@ -57,8 +57,8 @@ def ticket_and_image_upload(request):
 
 @login_required
 def subscription_page(request):
-    form = None
-    return render(request, 'ticket_and_review/abonnements.html', context={'form': form})
+    subscription = UserFollows.objects.all()
+    return render(request, 'ticket_and_review/subscription.html', context={'subscription': subscription})
 
 
 @login_required
@@ -91,3 +91,4 @@ def delete_ticket(request, ticket_id):
         'delete_form': delete_form,
         }
     return render(request, 'ticket_and_review/delete_ticket.html', context=context)
+

@@ -19,10 +19,8 @@
                     <p class="date">{{ ticket.time_created }}</p>
                     <p class="content">{{ ticket.description | safe }}</p>
                     {% if ticket.image %}
-
                         <img src="{{ ticket.image.url }}">
                     {% endif %}
-
 
                     <p class="ticket_review corner_btn"><a href="{% url 'signup' %}"><button type="button" name='review'>Créer une critique</button></a></p>
                 </div>

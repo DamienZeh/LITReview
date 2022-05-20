@@ -8,7 +8,7 @@ from .views import flux_page as flux, posts_page as posts,\
 urlpatterns = [
     path('flux/', flux, name="flux"),
     path('posts/', posts, name="posts"),
-    path('abonnements/', subscription, name="abonnements"),
+    path('subscription/', subscription, name="subscription"),
     path('image/upload/', image_upload, name='image_upload'),
     path('ticket/create', ticket_and_image_upload, name='ticket_create'),
     path('ticket/<int:ticket_id>', view_ticket, name='view_ticket'),
