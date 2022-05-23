@@ -1,10 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from .forms import TicketForm, DeleteTicketForm
+from .forms import TicketForm, DeleteTicketForm,FollowUsersForm
 from .models import Ticket, UserFollows
 from django.shortcuts import get_object_or_404, render, redirect
-
+from django.db.models import Q
 
 @login_required
 def view_ticket(request, ticket_id):
@@ -14,7 +14,7 @@ def view_ticket(request, ticket_id):
 
 @login_required
 def flux_page(request):
-    tickets = Ticket.objects.all()
+    tickets = Ticket.objects.filter(Q())
     return render(request, 'ticket_and_review/flux.html', context={'tickets': tickets})
 
 
@@ -57,8 +57,13 @@ def ticket_and_image_upload(request):
 
 @login_required
 def subscription_page(request):
-    subscription = UserFollows.objects.all()
-    return render(request, 'ticket_and_review/subscription.html', context={'subscription': subscription})
+    subscription_form = FollowUsersForm(instance=request.user)
+    if request.method == 'POST':
+        subscription_form = FollowUsersForm(request.POST, instance=request.user)
+        if subscription_form.is_valid():
+            subscription_form.save()
+            return redirect('subscription')
+    return render(request, 'ticket_and_review/subscription.html', context={'subscription_form': subscription_form})
 
 
 @login_required

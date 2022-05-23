@@ -1,20 +1,29 @@
 {% extends 'ticket_and_review/base.html' %}
 {% block content %}
     <div class="post">
-        <h2>Suivre d'autres utilisateurs</h2>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ subcription_form.as_p }}
-            {{ request.user }}
-            {{ subcription_form.users }}
-            {% for UserFollows in user.following.all %}
-                {{ request.user }}
-                {{ user }}
-            {% endfor %}
 
-            <div class="save">
-                <button class="save-btn" type="submit" >Envoyer</button>
-            </div>
+        <form method="post" >
+            <h2>Suivre des utilisateurs</h2>
+
+                {{ subscription_form.as_p }}
+                {% csrf_token %}
+                <button type="submit" >Confirmer</button>
+        </form>
+        <br> <br> <br>
+        <h2>Suivre d'autres utilisateurs</h2>
+        <form method="post" >
+            <h2>Abonnements</h2>
+
+            {{ subscription_form.as_p }}
+            {% csrf_token %}
+            <button type="submit" >Confirmer</button>
+             <h2>Abonné</h2>
+            {% for user in request.user %}
+                <p>{{ user }}</p>
+
+
+
+            {% endfor %}
         </form>
     </div>
 {% endblock content %}

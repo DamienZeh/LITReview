@@ -1,9 +1,9 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth import get_user_model
-from . import models
+from . models  import UserFollows, Ticket
 
-
+User = get_user_model()
 
 class FluxForm(forms.Form):
     pass
@@ -19,9 +19,19 @@ class TicketForm(forms.ModelForm):
                              widget=forms.FileInput(attrs={'class': 'django_btn'}))
 
     class Meta:
-        model = models.Ticket
+        model = Ticket
         fields = ['title', 'description', 'image']
 
 
 class DeleteTicketForm(forms.Form):
     delete_ticket = forms.BooleanField(widget=forms.HiddenInput, initial=True)
+
+
+class FollowUsersForm(forms.ModelForm):
+    class Meta:
+        model = UserFollows
+        fields = ['followed_user']
+
+
+class SearchUserForm(forms.Form):
+    username_searched = forms.CharField()

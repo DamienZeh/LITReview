@@ -14,6 +14,7 @@ urlpatterns = [
     path('ticket/<int:ticket_id>', view_ticket, name='view_ticket'),
     path('ticket/<int:ticket_id>/edit', edit_ticket, name='edit_ticket'),
     path('ticket/<int:ticket_id>/delete', delete_ticket, name='delete_ticket'),
+    path('follow-users/', subscription, name='follow_users')
 ]
 if settings.DEBUG:
     urlpatterns += static(
