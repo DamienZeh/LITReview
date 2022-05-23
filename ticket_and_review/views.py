@@ -14,8 +14,15 @@ def view_ticket(request, ticket_id):
 
 @login_required
 def flux_page(request):
-    tickets = Ticket.objects.filter(Q())
-    return render(request, 'ticket_and_review/flux.html', context={'tickets': tickets})
+    # users_followed = request.user.following.values_list('followed_user')
+    users_followed = []
+    for user in UserFollows.objects.filter(user=request.user):
+        users_followed.append(user.followed_user)
+    users_followed.append(request.user)
+
+    tickets_user = Ticket.objects.filter(Q(user=request.user) | Q(user__in=users_followed))
+
+    return render(request, 'ticket_and_review/flux.html', context={'tickets': tickets_user})
 
 
 @login_required
@@ -58,11 +65,7 @@ def ticket_and_image_upload(request):
 @login_required
 def subscription_page(request):
     subscription_form = FollowUsersForm(instance=request.user)
-    if request.method == 'POST':
-        subscription_form = FollowUsersForm(request.POST, instance=request.user)
-        if subscription_form.is_valid():
-            subscription_form.save()
-            return redirect('subscription')
+
     return render(request, 'ticket_and_review/subscription.html', context={'subscription_form': subscription_form})
 
 
@@ -73,6 +76,7 @@ def edit_ticket(request, ticket_id):
     if request.method == 'POST':
         if 'edit_ticket' in request.POST:
             edit_form = TicketForm(request.POST or None, request.FILES or None, instance=ticket)
+
             if edit_form.is_valid():
                 edit_form.save()
                 return redirect('posts')

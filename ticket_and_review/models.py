@@ -25,6 +25,8 @@ class Ticket(models.Model):
         super().save(*args, **kwargs)
         if self.image:
             self.resize_image()
+        else:
+            self.image = None
 
     def __str__(self):# show ticket in admin with their titles
         return self.title
