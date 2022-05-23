@@ -26,6 +26,10 @@ class Ticket(models.Model):
         if self.image:
             self.resize_image()
 
+    def __str__(self):# show ticket in admin with their titles
+        return self.title
+
+
 
 
 
