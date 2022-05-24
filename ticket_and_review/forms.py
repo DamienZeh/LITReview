@@ -31,8 +31,3 @@ class FollowUsersForm(forms.ModelForm):
     class Meta:
         model = UserFollows
         fields = ['followed_user']
-
-
-
-class SearchUserForm(forms.Form):
-    username_searched = forms.CharField()

@@ -13,18 +13,18 @@
 
         <h2>Abonnements</h2>
         {% for followed in users_followed %}
-        <div class="unfollow">
-            <div class="unfollow_user"> {{ followed.followed_user }}</div>
-            <div class="unfollow_btn"><a href="{% url 'unfollow' followed.id %}"><button type="submit" >Désabonner</button></a></div>
-        </div>
+            <div class="unfollow">
+                <div class="unfollow_user"> {{ followed.followed_user }}</div>
+                <div class="unfollow_btn"><a href="{% url 'unfollow' followed.id %}"><button type="submit" >Désabonner</button></a></div>
+            </div>
         {% endfor %}
         <br>
 
         <h2>Abonnés</h2>
         {% for follower in users_followers %}
-        <div class="followed">
-            <div class="followed_user">{{ follower.user }}</div>
-        </div>
+            <div class="followed">
+                <div class="followed_user">{{ follower.user }}</div>
+            </div>
         {% endfor %}
         </form>
         <br>

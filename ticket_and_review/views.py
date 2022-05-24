@@ -1,11 +1,10 @@
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse
 from django.contrib.auth.models import User
-from .forms import TicketForm, DeleteTicketForm,FollowUsersForm
-from .models import Ticket, UserFollows
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404, render, redirect
 from django.db.models import Q
+from .forms import TicketForm, DeleteTicketForm
+from .models import Ticket, UserFollows
 
 
 @login_required
@@ -16,7 +15,6 @@ def view_ticket(request, ticket_id):
 
 @login_required
 def flux_page(request):
-    # users_followed = request.user.following.values_list('followed_user')
     users_followed = []
     for user in UserFollows.objects.filter(user=request.user):
         users_followed.append(user.followed_user)
@@ -70,9 +68,11 @@ def subscription_page(request):
     users_followers = UserFollows.objects.filter(followed_user=request.user)
     if request.method == 'POST':
         follow = request.POST['name']#get input name's user from html
+        username = request.user
         try:
             to_follow = User.objects.get(username=follow)# User instance
-            UserFollows.objects.create(user=request.user, followed_user=to_follow)
+            if to_follow != username: # can't follow yourself
+                UserFollows.objects.create(user=request.user, followed_user=to_follow)
         except ObjectDoesNotExist :
            print('Vous êtes déja abonné à cette personne.')
 
