@@ -10,16 +10,16 @@
      <div class="grid-container">
         {% for post in posts %}
                 <div class="post">
+                     <p class="date">{{ post.time_created }}</p>
                     {% if post.user == request.user %}
                         <p><strong>Vous</strong> avez demandé une critique</p>
                     {% else %}
                         <p><strong>{{ post.user }}</strong> a demandé une critique</p>
                     {% endif %}
-                    <p>{{ post.title }}</p>
-                    <p class="date">{{ post.time_created }}</p>
+                    <h4>{{ post.title }}</h4>
                     <p class="content">{{ post.description | safe }}</p>
                     {% if post.image %}
-                        <img src="{{ ticket.image.url }}">
+                        <img src="{{ post.image.url }}">
                     {% endif %}
 
                     <p class="ticket_review corner_btn"><a href="{% url 'signup' %}"><button type="button" name='review'>Créer une critique</button></a></p>

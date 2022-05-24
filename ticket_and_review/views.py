@@ -14,7 +14,7 @@ def flux_page(request):
         users_followed.append(user.followed_user)
     users_followed.append(request.user)
     tickets = Ticket.objects.filter(Q(user=request.user) | Q(user__in=users_followed))
-    posts = sorted(chain( tickets),
+    posts = sorted(chain(tickets),
                    key= lambda post: post.time_created, reverse=True)
     return render(request, 'ticket_and_review/flux.html', context={'posts': posts})
 

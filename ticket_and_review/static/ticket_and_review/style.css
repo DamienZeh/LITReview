@@ -141,17 +141,18 @@ nav {
     background-image: linear-gradient(to bottom right, white, rgb(208,213,212));
 }
 .post .date {
-    text-align: right;
-    margin: 0;
-    margin-bottom: 15px;
+    margin-top: 5px;
+    float: right;
     font-size: 0.9em;
 }
 .post .content {
-    margin-top: 0px;
+    margin-top: 25px;
     overflow: hidden;
 }
-.post h4 {
-    margin-bottom: 0;
+.post h4{
+    margin-top: 10px;
+    padding-top: 10px;
+    margin-bottom: 10px;
 }
 .post img {
     margin-bottom: 5px;
@@ -203,11 +204,15 @@ nav {
 /* Fin posts page */
 
 /* page modif et delete ticket */
-.save-btn {
+.save-btn1 {
     position: relative;
     top: -77px;
 }
-.save-btn, .delete-btn, .fake-btn, .fake-btn2{
+.save-btn2 {
+    position: relative;
+    top: -5px;
+}
+.save-btn1, .save-btn2, .delete-btn, .fake-btn, .fake-btn2{
     color: black;
     font-size: 14px;
     width: 130px;
