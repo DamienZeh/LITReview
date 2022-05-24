@@ -1,29 +1,32 @@
 {% extends 'ticket_and_review/base.html' %}
 {% block content %}
     <div class="post">
-
-        <form method="post" >
-            <h2>Suivre des utilisateurs</h2>
-
-                {{ subscription_form.as_p }}
-                {% csrf_token %}
-                <button type="submit" >Confirmer</button>
-        </form>
-        <br> <br> <br>
         <h2>Suivre d'autres utilisateurs</h2>
         <form method="post" >
-            <h2>Abonnements</h2>
-
-            {{ subscription_form.as_p }}
             {% csrf_token %}
-            <button type="submit" >Confirmer</button>
-             <h2>Abonné</h2>
-            {% for user in request.user %}
-                <p>{{ user }}</p>
-
-
-
-            {% endfor %}
+            <div class="search">
+                <input class="search_input" type="text" name="name" placeholder="Nom de l'utilisateur">
+                <button class="search_btn" type="submit" >Envoyer</button>
+            </div>
         </form>
+        <br>
+
+        <h2>Abonnements</h2>
+        {% for followed in users_followed %}
+        <div class="unfollow">
+            <div class="unfollow_user"> {{ followed.followed_user }}</div>
+            <div class="unfollow_btn"><a href="{% url 'unfollow' followed.id %}"><button type="submit" >Désabonner</button></a></div>
+        </div>
+        {% endfor %}
+        <br>
+
+        <h2>Abonnés</h2>
+        {% for follower in users_followers %}
+        <div class="followed">
+            <div class="followed_user">{{ follower.user }}</div>
+        </div>
+        {% endfor %}
+        </form>
+        <br>
     </div>
 {% endblock content %}

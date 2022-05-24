@@ -1,10 +1,12 @@
 {% extends 'ticket_and_review/base.html' %}
 {% block content %}
-    <div class="post">
+    <div class="post create_ticket">
         <h2>Créer un ticket</h2>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ ticket_form.as_p }}
+             <p class="image_txt">Image</p>
+             <br><br>
              <div class="fake-btn2">
                  <p>Télécharger fichier</p>
              </div>

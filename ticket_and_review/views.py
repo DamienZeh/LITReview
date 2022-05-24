@@ -1,10 +1,12 @@
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from .forms import TicketForm, DeleteTicketForm,FollowUsersForm
 from .models import Ticket, UserFollows
 from django.shortcuts import get_object_or_404, render, redirect
 from django.db.models import Q
+
 
 @login_required
 def view_ticket(request, ticket_id):
@@ -64,9 +66,26 @@ def ticket_and_image_upload(request):
 
 @login_required
 def subscription_page(request):
-    subscription_form = FollowUsersForm(instance=request.user)
+    users_followed = UserFollows.objects.filter(user=request.user)
+    users_followers = UserFollows.objects.filter(followed_user=request.user)
+    if request.method == 'POST':
+        follow = request.POST['name']#get input name's user from html
+        try:
+            to_follow = User.objects.get(username=follow)# User instance
+            UserFollows.objects.create(user=request.user, followed_user=to_follow)
+        except ObjectDoesNotExist :
+           print('Vous êtes déja abonné à cette personne.')
 
-    return render(request, 'ticket_and_review/subscription.html', context={'subscription_form': subscription_form})
+
+    return render(request, 'ticket_and_review/subscription.html',
+                  context={'users_followed': users_followed, 'users_followers': users_followers})
+
+
+@login_required
+def unfollow(request, user_follows_id):
+    connection = UserFollows.objects.filter(pk=user_follows_id)
+    connection.delete()
+    return redirect('subscription')
 
 
 @login_required

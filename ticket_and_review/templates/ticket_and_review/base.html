@@ -21,7 +21,7 @@
             </nav>
          </header>
         {% if user.is_authenticated %}
-        <p id="id_connect">Connecté en tant que <strong>{{ request.user|capfirst }}</strong></p>
+        <p id="id_connect">Connecté en tant que <strong>{{ request.user }}</strong></p>
         {% endif %}
         <div class="trait"><hr></div>
         {% block content %}{% endblock content %}

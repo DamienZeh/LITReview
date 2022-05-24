@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from django.urls import path
 from .views import flux_page as flux, posts_page as posts,\
     subscription_page as subscription, ticket_and_image_upload, image_upload,\
-    view_ticket, edit_ticket, delete_ticket
+    view_ticket, edit_ticket, delete_ticket, unfollow
 
 urlpatterns = [
     path('flux/', flux, name="flux"),
@@ -14,7 +14,8 @@ urlpatterns = [
     path('ticket/<int:ticket_id>', view_ticket, name='view_ticket'),
     path('ticket/<int:ticket_id>/edit', edit_ticket, name='edit_ticket'),
     path('ticket/<int:ticket_id>/delete', delete_ticket, name='delete_ticket'),
-    path('follow-users/', subscription, name='follow_users')
+    path('follow-users/', subscription, name='follow_users'),
+    path('unfollow/<user_follows_id>', unfollow, name='unfollow'),
 ]
 if settings.DEBUG:
     urlpatterns += static(
