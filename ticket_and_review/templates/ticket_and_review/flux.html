@@ -8,17 +8,17 @@
      </div>
     {% csrf_token %}
      <div class="grid-container">
-        {% for ticket in tickets %}
+        {% for post in posts %}
                 <div class="post">
-                    {% if ticket.user == request.user %}
+                    {% if post.user == request.user %}
                         <p><strong>Vous</strong> avez demandé une critique</p>
                     {% else %}
-                        <p><strong>{{ ticket.user }}</strong> a demandé une critique</p>
+                        <p><strong>{{ post.user }}</strong> a demandé une critique</p>
                     {% endif %}
-                    <p>{{ ticket.title }}</p>
-                    <p class="date">{{ ticket.time_created }}</p>
-                    <p class="content">{{ ticket.description | safe }}</p>
-                    {% if ticket.image %}
+                    <p>{{ post.title }}</p>
+                    <p class="date">{{ post.time_created }}</p>
+                    <p class="content">{{ post.description | safe }}</p>
+                    {% if post.image %}
                         <img src="{{ ticket.image.url }}">
                     {% endif %}
 

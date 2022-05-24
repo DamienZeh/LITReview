@@ -9,11 +9,10 @@ from django.contrib.auth.models import User
 class Ticket(models.Model):
 
     title = models.CharField(max_length=128, verbose_name='Titre')
-    description = models.TextField(max_length=5000, verbose_name='Description')
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    description = models.TextField(max_length=5000, verbose_name='Description', blank=True)
+    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    image = models.ImageField(null=True, blank=True, verbose_name='image')
     time_created = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(null=True, verbose_name='image', blank=True)
-
     IMAGE_MAX_SIZE = (200, 200)
 
     def resize_image(self):
@@ -32,21 +31,16 @@ class Ticket(models.Model):
         return self.title
 
 
-
-
-
-"""
 class Review(models.Model):
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(
-        # validates that rating must be between 0 and 5
         validators=[MinValueValidator(0), MaxValueValidator(5)])
     headline = models.CharField(max_length=128)
     body = models.CharField(max_length=8192, blank=True)
     user = models.ForeignKey(
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     time_created = models.DateTimeField(auto_now_add=True)
-"""
+
 
 class UserFollows(models.Model):
     # Your UserFollows model definition goes here

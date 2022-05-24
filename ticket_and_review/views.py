@@ -5,13 +5,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.db.models import Q
 from .forms import TicketForm, DeleteTicketForm
 from .models import Ticket, UserFollows
-
-
-@login_required
-def view_ticket(request, ticket_id):
-    ticket = get_object_or_404(Ticket, id=ticket_id)
-    return render(request, 'ticket_and_review/view_ticket.html', {'ticket': ticket})
-
+from itertools import chain
 
 @login_required
 def flux_page(request):
@@ -19,10 +13,10 @@ def flux_page(request):
     for user in UserFollows.objects.filter(user=request.user):
         users_followed.append(user.followed_user)
     users_followed.append(request.user)
-
-    tickets_user = Ticket.objects.filter(Q(user=request.user) | Q(user__in=users_followed))
-
-    return render(request, 'ticket_and_review/flux.html', context={'tickets': tickets_user})
+    tickets = Ticket.objects.filter(Q(user=request.user) | Q(user__in=users_followed))
+    posts = sorted(chain( tickets),
+                   key= lambda post: post.time_created, reverse=True)
+    return render(request, 'ticket_and_review/flux.html', context={'posts': posts})
 
 
 @login_required
@@ -32,10 +26,16 @@ def posts_page(request):
 
 
 @login_required
+def view_ticket(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    return render(request, 'ticket_and_review/view_ticket.html', {'ticket': ticket})
+
+
+@login_required
 def image_upload(request):
     form = TicketForm().image
     if request.method == 'POST':
-        form =TicketForm(request.POST, request.FILES)
+        form = TicketForm(request.POST, request.FILES)
         if form.is_valid():
             image = form.save(commit=False)
             # set the uploader to the user before saving the model
