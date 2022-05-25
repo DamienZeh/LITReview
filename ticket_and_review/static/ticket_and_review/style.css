@@ -12,9 +12,6 @@ a{
   color: white;
   font-size: 22px;
 }
-.hide {
-   display: none;
-}
 .invisible {
    padding: 0px;
    z-index: 1;

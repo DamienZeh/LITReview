@@ -6,6 +6,8 @@ from django.db.models import Q
 from .forms import TicketForm, DeleteTicketForm
 from .models import Ticket, UserFollows
 from itertools import chain
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
 
 @login_required
 def flux_page(request):
@@ -69,12 +71,18 @@ def subscription_page(request):
     if request.method == 'POST':
         follow = request.POST['name']#get input name's user from html
         username = request.user
-        if follow != "":
+        try:
             to_follow = User.objects.get(username=follow)# User instance
-            if to_follow != username : # can't follow yourself
-                UserFollows.objects.create(user=request.user, followed_user=to_follow)
-
-
+            if to_follow != username :
+                if UserFollows.objects.get_or_create\
+                            (user=request.user, followed_user=to_follow) is False:
+                    UserFollows.objects.create(user=request.user, followed_user=to_follow)
+                else:
+                    messages.add_message(request, messages.INFO, f"Vous êtes abonné à {to_follow}.")
+            else:
+                messages.add_message(request, messages.INFO, f"Vous êtes {request.user} !")
+        except ObjectDoesNotExist:
+            messages.add_message(request, messages.INFO,"Cet utilisateur n'existe pas")
 
     return render(request, 'ticket_and_review/subscription.html',
                   context={'users_followed': users_followed, 'users_followers': users_followers})
