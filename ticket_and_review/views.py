@@ -82,7 +82,7 @@ def subscription_page(request):
             else:
                 messages.add_message(request, messages.INFO, f"Vous êtes {request.user} !")
         except ObjectDoesNotExist:
-            messages.add_message(request, messages.INFO,"Cet utilisateur n'existe pas")
+            messages.add_message(request, messages.INFO, "Cet utilisateur n'existe pas.")
 
     return render(request, 'ticket_and_review/subscription.html',
                   context={'users_followed': users_followed, 'users_followers': users_followers})
@@ -100,32 +100,16 @@ def edit_ticket(request, ticket_id):
     ticket = Ticket.objects.get(id=ticket_id)
     edit_form = TicketForm(instance=ticket)
     if request.method == 'POST':
-        form = TicketForm(request.POST or None, request.FILES or None, instance=ticket)
-        if form.is_valid():
-            form.save()
+        edit_form = TicketForm(request.POST or None, request.FILES or None, instance=ticket)
+        if edit_form.is_valid():
+            edit_form.save()
             return redirect('posts')
 
     context = {
         'edit_form': edit_form,
         }
     return render(request, 'ticket_and_review/edit_ticket.html', context=context)
-"""
-@login_required
-def edit_ticket(request, ticket_id):
-    ticket = get_object_or_404(Ticket, id=ticket_id)
-    edit_form = TicketForm(instance=ticket)
-    if request.method == 'POST':
-        if 'edit_ticket' in request.POST:
-            edit_form = TicketForm(request.POST or None, request.FILES or None, instance=ticket)
 
-            if edit_form.is_valid():
-                edit_form.save()
-                return redirect('posts')
-    context = {
-        'edit_form': edit_form,
-        }
-    return render(request, 'ticket_and_review/edit_ticket.html', context=context)
-"""
 
 @login_required
 def delete_ticket(request, ticket_id):
