@@ -1,3 +1,6 @@
+from pathlib import Path
+import os
+
 """
 Django settings for bookreviews project.
 
@@ -10,7 +13,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -135,4 +138,4 @@ LOGIN_REDIRECT_URL = 'flux'
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = BASE_DIR.joinpath('media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

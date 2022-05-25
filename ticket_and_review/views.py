@@ -89,6 +89,21 @@ def unfollow(request, user_follows_id):
 
 @login_required
 def edit_ticket(request, ticket_id):
+    ticket = Ticket.objects.get(id=ticket_id)
+    edit_form = TicketForm(instance=ticket)
+    if request.method == 'POST':
+        form = TicketForm(request.POST or None, request.FILES or None, instance=ticket)
+        if form.is_valid():
+            form.save()
+            return redirect('posts')
+
+    context = {
+        'edit_form': edit_form,
+        }
+    return render(request, 'ticket_and_review/edit_ticket.html', context=context)
+"""
+@login_required
+def edit_ticket(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
     edit_form = TicketForm(instance=ticket)
     if request.method == 'POST':
@@ -102,7 +117,7 @@ def edit_ticket(request, ticket_id):
         'edit_form': edit_form,
         }
     return render(request, 'ticket_and_review/edit_ticket.html', context=context)
-
+"""
 
 @login_required
 def delete_ticket(request, ticket_id):

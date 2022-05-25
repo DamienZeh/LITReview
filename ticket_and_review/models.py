@@ -11,7 +11,7 @@ class Ticket(models.Model):
     title = models.CharField(max_length=128, verbose_name='Titre')
     description = models.TextField(max_length=5000, verbose_name='Description', blank=True)
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    image = models.ImageField(null=True, blank=True, verbose_name='image')
+    image = models.ImageField(null=True, blank=True, verbose_name='image', upload_to='./')
     time_created = models.DateTimeField(auto_now_add=True)
     IMAGE_MAX_SIZE = (200, 200)
 

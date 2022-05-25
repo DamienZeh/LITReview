@@ -5,7 +5,7 @@ from .models import Ticket, UserFollows
 
 class TicketAdmin(admin.ModelAdmin):
     """Show ticket's info in admin"""
-    list_display = ('title', 'description', 'user', 'time_created')
+    list_display = ('title', 'description', 'user', 'image', 'time_created')
 
 class UserFollowsAdmin(admin.ModelAdmin):
     """Show userfollows's info in admin"""
