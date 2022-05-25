@@ -12,7 +12,7 @@ def flux_page(request):
     users_followed = []
     for user in UserFollows.objects.filter(user=request.user):
         users_followed.append(user.followed_user)
-    users_followed.append(request.user)
+
     tickets = Ticket.objects.filter(Q(user=request.user) | Q(user__in=users_followed))
     posts = sorted(chain(tickets),
                    key= lambda post: post.time_created, reverse=True)
@@ -69,12 +69,11 @@ def subscription_page(request):
     if request.method == 'POST':
         follow = request.POST['name']#get input name's user from html
         username = request.user
-        try:
+        if follow != "":
             to_follow = User.objects.get(username=follow)# User instance
-            if to_follow != username: # can't follow yourself
+            if to_follow != username : # can't follow yourself
                 UserFollows.objects.create(user=request.user, followed_user=to_follow)
-        except ObjectDoesNotExist :
-           print('Vous êtes déja abonné à cette personne.')
+
 
 
     return render(request, 'ticket_and_review/subscription.html',
@@ -83,8 +82,8 @@ def subscription_page(request):
 
 @login_required
 def unfollow(request, user_follows_id):
-    connection = UserFollows.objects.filter(pk=user_follows_id)
-    connection.delete()
+    subscription = UserFollows.objects.filter(pk=user_follows_id)
+    subscription.delete()
     return redirect('subscription')
 
 
