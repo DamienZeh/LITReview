@@ -3,27 +3,29 @@
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
+
      <div class="grid-container">
+         {% if tickets_number < 1 %}
+                <p class="none_posts">Vous n'avez rien publié pour l'instant.</p>
+         {% endif %}
         {% for ticket in tickets %}
-             {% if ticket.user == request.user %}
-                <div class="post">
-                    <p class="date">{{ ticket.time_created }}</p>
-                    <p><strong>Vous</strong> avez publié un ticket</p>
-                    <h4>{{ ticket.title }}</h4>
-                    <p class="content">{{ ticket.description | safe }}</p>
-                    {% if ticket.image %}
-                        <img src="{{ ticket.image.url }}">
-                    {% endif %}
-                    <div class="modif_sup_btn">
-                        <p class="ticket_review modif_btn">
-                            <a href="{% url 'edit_ticket' ticket.id %}">
-                                <button type="button" name='review'>Modifier</button></a></p>
-                        <p class="ticket_review modif_btn">
-                            <a href="{% url 'delete_ticket' ticket.id %}">
-                                <button type="button" name='review'>Supprimer</button></a></p>
-                    </div>
+            <div class="post">
+                <p class="date">{{ ticket.time_created }}</p>
+                <p><strong>Vous</strong> avez publié un ticket</p>
+                <h4>{{ ticket.title }}</h4>
+                <p class="content">{{ ticket.description | safe }}</p>
+                {% if ticket.image %}
+                    <img src="{{ ticket.image.url }}">
+                {% endif %}
+                <div class="modif_sup_btn">
+                    <p class="ticket_review modif_btn">
+                        <a href="{% url 'edit_ticket' ticket.id %}">
+                            <button type="button" name='review'>Modifier</button></a></p>
+                    <p class="ticket_review modif_btn">
+                        <a href="{% url 'delete_ticket' ticket.id %}">
+                            <button type="button" name='review'>Supprimer</button></a></p>
                 </div>
-             {% endif %}
+            </div>
         {% endfor %}
     </div>
 </form>

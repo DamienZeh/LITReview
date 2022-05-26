@@ -23,8 +23,10 @@ def flux_page(request):
 
 @login_required
 def posts_page(request):
-    tickets = Ticket.objects.all()
-    return render(request, 'ticket_and_review/posts.html', context={'tickets': tickets})
+    tickets = Ticket.objects.filter(Q(user=request.user))
+    tickets_number = len(tickets)
+    return render(request, 'ticket_and_review/posts.html',
+                  context={'tickets': tickets, 'tickets_number': tickets_number})
 
 
 @login_required
@@ -62,6 +64,8 @@ def ticket_and_image_upload(request):
         'ticket_form': ticket_form
         }
     return render(request, 'ticket_and_review/create_ticket_post.html', context=context)
+
+
 
 
 @login_required

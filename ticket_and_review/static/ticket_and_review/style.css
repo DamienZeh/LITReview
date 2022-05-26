@@ -178,6 +178,11 @@ nav {
 .post h2 {
     text-align: center;
 }
+.none_posts {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
 /* Fin flux page & other */
 
 /* posts page */
