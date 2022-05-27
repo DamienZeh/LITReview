@@ -127,6 +127,7 @@ nav {
     padding-left: 50px;
 }
 .post {
+    min-height: 150px;
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
@@ -182,6 +183,21 @@ nav {
     text-align: center;
     color: white;
     font-weight: bold;
+}
+.title-review-&-rating {
+    display: block;
+    justify-content: space-between;
+}
+.title-review {
+    float:left;
+    margin-right: 7px;
+}
+.title-review h4{
+    padding-top: 0px;
+     margin-top: 4px;
+}
+.rating p{
+    padding-top: 2px;
 }
 /* Fin flux page & other */
 
@@ -327,3 +343,6 @@ nav {
     color: white;
 }
 /* fin page abonnement */
+
+
+

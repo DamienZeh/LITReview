@@ -3,30 +3,43 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404, render, redirect
 from django.db.models import Q
-from .forms import TicketForm, DeleteTicketForm
-from .models import Ticket, UserFollows
+from .forms import TicketForm, DeletePostForm, ReviewForm
+from .models import Ticket, UserFollows, Review
 from itertools import chain
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
+from django.db.models import CharField, Value
+
 
 @login_required
-def flux_page(request):
+def posts(request):
+    """
+    Get all tickets user and users followed
+    """
     users_followed = []
     for user in UserFollows.objects.filter(user=request.user):
         users_followed.append(user.followed_user)
 
     tickets = Ticket.objects.filter(Q(user=request.user) | Q(user__in=users_followed))
-    posts = sorted(chain(tickets),
+    reviews = Review.objects.filter(Q(user=request.user) | Q(user__in=users_followed))
+    tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
+    reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
+    all_posts = sorted(chain(reviews, tickets),
                    key= lambda post: post.time_created, reverse=True)
-    return render(request, 'ticket_and_review/flux.html', context={'posts': posts})
+    return all_posts
+
+
+@login_required
+def flux_page(request):
+    get_posts = posts(request)
+    return render(request, 'ticket_and_review/flux.html', context={'posts': get_posts})
 
 
 @login_required
 def posts_page(request):
-    tickets = Ticket.objects.filter(Q(user=request.user))
-    tickets_number = len(tickets)
+    get_posts = posts(request)
     return render(request, 'ticket_and_review/posts.html',
-                  context={'tickets': tickets, 'tickets_number': tickets_number})
+                  context={'posts': get_posts})
 
 
 @login_required
@@ -65,7 +78,20 @@ def ticket_and_image_upload(request):
         }
     return render(request, 'ticket_and_review/create_ticket_post.html', context=context)
 
-
+@login_required
+def review_upload(request):
+    review_form = ReviewForm()
+    if request.method == 'POST':
+        review_form = ReviewForm(request.POST, request.FILES)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.user = request.user
+            review.save()
+            return redirect('flux')
+    context = {
+         'review_form': review_form
+        }
+    return render(request, 'ticket_and_review/create_review_post.html', context=context)
 
 
 @login_required
@@ -116,17 +142,46 @@ def edit_ticket(request, ticket_id):
 
 
 @login_required
+def edit_review(request, review_id):
+    review = Review.objects.get(id=review_id)
+    edit_form = ReviewForm(instance=review)
+    if request.method == 'POST':
+        edit_form = ReviewForm(request.POST or None, request.FILES or None, instance=review)
+        if edit_form.is_valid():
+            edit_form.save()
+            return redirect('posts')
+
+    context = {
+        'edit_form': edit_form,
+        }
+    return render(request, 'ticket_and_review/edit_review.html', context=context)
+
+
+@login_required
 def delete_ticket(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
-    delete_form = DeleteTicketForm()
+    delete_form = DeletePostForm()
     if request.method == 'POST':
-        if 'delete_ticket' in request.POST:
-            delete_form = DeleteTicketForm(request.POST)
-            if delete_form.is_valid():
-                ticket.delete()
-                return redirect('posts')
+        delete_form = DeletePostForm(request.POST)
+        if delete_form.is_valid():
+            ticket.delete()
+            return redirect('posts')
     context = {
         'delete_form': delete_form,
         }
-    return render(request, 'ticket_and_review/delete_ticket.html', context=context)
+    return render(request, 'ticket_and_review/delete_post.html', context=context)
+
+@login_required
+def delete_review(request, review_id):
+    review = get_object_or_404(Review, id=review_id)
+    delete_form = DeletePostForm()
+    if request.method == 'POST':
+        delete_form = DeletePostForm(request.POST)
+        if delete_form.is_valid():
+            review.delete()
+            return redirect('posts')
+    context = {
+        'delete_form': delete_form,
+        }
+    return render(request, 'ticket_and_review/delete_post.html', context=context)
 

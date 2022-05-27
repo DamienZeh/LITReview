@@ -23,13 +23,20 @@ class TicketForm(forms.ModelForm):
 
 
 class ReviewForm(forms.ModelForm):
+    headline = forms.CharField(label='Titre', widget=forms.Textarea(attrs={'class': 'form-control',
+                    'placeholder': 'Titre de la critique', 'cols': 60, 'rows': 1}))
+    body = forms.CharField(label='Description', widget=forms.Textarea(attrs={'class': 'form-control',
+                    'placeholder': 'Commentaire de la critique.', 'cols': 60}))
+
+    number_rating = (('0', 0), ('1', 1), ('2', 2), ('3', 3), ('4', 4), ('5', 5))
+    rating = forms.ChoiceField(widget=forms.RadioSelect, choices= number_rating)
     class Meta:
         model = Review
-        fields = ['headline', 'body']
+        fields = ['headline','rating', 'body']
 
 
-class DeleteTicketForm(forms.Form):
-    delete_ticket = forms.BooleanField(widget=forms.HiddenInput, initial=True)
+class DeletePostForm(forms.Form):
+    delete_post = forms.BooleanField(widget=forms.HiddenInput, initial=True)
 
 
 class FollowUsersForm(forms.ModelForm):

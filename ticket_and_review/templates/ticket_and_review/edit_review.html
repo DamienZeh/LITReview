@@ -1,0 +1,22 @@
+{% extends 'ticket_and_review/base.html' %}
+{% block content %}
+    <h2 class="title">Modifier le billet</h2>
+    <form method="post" enctype="multipart/form-data">
+        <div class="grid-container">
+            <div class="post post-modif">
+                {% csrf_token %}
+                    <p>Titre</p>
+                    <p class="champs">{{ edit_form.headline }}</p>
+                    <p>Note</p>
+                    {% for rate in edit_form.rating %}
+                        {{ rate }}
+                    {% endfor %}
+                    <p>Commentaire</p>
+                    <p class="champs">{{ edit_form.body }}</p>
+                <div class="save">
+                    <button class="save-btn2" type="submit" >Envoyer</button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock content %}

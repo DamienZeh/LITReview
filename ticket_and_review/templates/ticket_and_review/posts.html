@@ -5,27 +5,66 @@
     {% csrf_token %}
 
      <div class="grid-container">
-         {% if tickets_number < 1 %}
+        {% if post|length in posts  > 0 %}
                 <p class="none_posts">Vous n'avez rien publié pour l'instant.</p>
-         {% endif %}
-        {% for ticket in tickets %}
-            <div class="post">
-                <p class="date">{{ ticket.time_created }}</p>
-                <p><strong>Vous</strong> avez publié un ticket</p>
-                <h4>{{ ticket.title }}</h4>
-                <p class="content">{{ ticket.description | safe }}</p>
-                {% if ticket.image %}
-                    <img src="{{ ticket.image.url }}">
-                {% endif %}
-                <div class="modif_sup_btn">
-                    <p class="ticket_review modif_btn">
-                        <a href="{% url 'edit_ticket' ticket.id %}">
-                            <button type="button" name='review'>Modifier</button></a></p>
-                    <p class="ticket_review modif_btn">
-                        <a href="{% url 'delete_ticket' ticket.id %}">
-                            <button type="button" name='review'>Supprimer</button></a></p>
+        {% endif %}
+        {% for post in posts %}
+
+
+            {% if post.content_type == 'TICKET' and post.user == request.user %}
+                <div class="post">
+                    <p class="date">{{ post.time_created }}</p>
+                    <p><strong>Vous</strong> avez publié un ticket</p>
+                    <h4>{{ post.title }}</h4>
+                    <p class="content">{{ post.description | safe }}</p>
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}">
+                    {% endif %}
+                    <div class="modif_sup_btn">
+                        <p class="ticket_review modif_btn">
+                            <a href="{% url 'edit_ticket' post.id %}">
+                                <button type="button" name='review'>Modifier</button></a></p>
+                        <p class="ticket_review modif_btn">
+                            <a href="{% url 'delete_ticket' post.id %}">
+                                <button type="button" name='review'>Supprimer</button></a></p>
+                    </div>
                 </div>
-            </div>
+            {% elif post.content_type == 'REVIEW' and post.user == request.user %}
+                <div class="post">
+                     <p class="date">{{ post.time_created }}</p>
+                    {% if post.user == request.user %}
+                        <p><strong>Vous</strong> avez publié une critique</p>
+                    {% else %}
+                        <p><strong>{{ post.user }}</strong> a publié une critique</p>
+                    {% endif %}
+                    <div class="title-review-&-rating">
+                        <div class="title-review"> <h4>{{ post.headline }}</h4></div>
+                        {% if post.rating == 0 %}
+                            <div class="rating"><p> - &#9734;&#9734;&#9734;&#9734;&#9734;<p></div>
+                        {% elif post.rating == 1 %}
+                            <div class="rating"><p> - &#9733;&#9734;&#9734;&#9734;&#9734;<p></div>
+                        {% elif post.rating == 2 %}
+                            <div class="rating"><p> - &#9733;&#9733;&#9734;&#9734;&#9734;<p></div>
+                        {% elif post.rating == 3 %}
+                            <div class="rating"><p> - &#9733;&#9733;&#9733;&#9734;&#9734;<p></div>
+                        {% elif post.rating == 4 %}
+                            <div class="rating"><p> - &#9733;&#9733;&#9733;&#9733;&#9734;<p></div>
+                        {% elif post.rating == 5 %}
+                            <div class="rating"><p> - &#9733;&#9733;&#9733;&#9733;&#9733;<p></div>
+                        {% endif %}
+                        <p class="content comment">{{ post.body | safe }}</p>
+                        <div class="modif_sup_btn">
+                            <p class="ticket_review modif_btn">
+                                <a href="{% url 'edit_review' post.id %}">
+                                    <button type="button" name='review'>Modifier</button></a></p>
+                            <p class="ticket_review modif_btn">
+                                <a href="{% url 'delete_review' post.id %}">
+                                    <button type="button" name='review'>Supprimer</button></a></p>
+                        </div>
+                    </div>
+
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
 </form>
