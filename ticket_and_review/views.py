@@ -84,42 +84,10 @@ def ticket_and_image_upload(request):
         }
     return render(request, 'ticket_and_review/create_ticket_post.html', context=context)
 
-"""
-@login_required
-def review_upload(request ):
-    if request.method == 'GET':
-        form_review = ReviewForm()
-        form_ticket = TicketForm()
-        html = './ticket_and_review/create_review_post.html'
-        context = {
-            'form_review': form_review, 'form_ticket': form_ticket
-        }
-        return render(request, html, context)
 
-    elif request.method == 'POST':
-        form_review = ReviewForm(data=request.POST, files=request.FILES)
-        form_ticket = TicketForm(data=request.POST, files=request.FILES)
-
-        html = './ticket_and_review/create_review_post.html'
-        context = {
-            'review_form': form_review, 'ticket_form': form_ticket
-        }
-
-        if form_review.is_valid() and form_ticket.is_valid():
-            form_ticket.instance.user = request.user
-            ticket = form_ticket.save()
-            form_review.instance.ticket = ticket
-            form_review.instance.user = request.user
-            form_review.save()
-
-            return redirect('flux')
-
-        return render(request, html, context)
-"""
 
 @login_required
 def review_upload(request):
-
     review_form = ReviewForm()
     ticket_form = TicketForm()
     if request.method == 'POST':
