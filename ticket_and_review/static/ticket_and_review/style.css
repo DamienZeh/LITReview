@@ -128,7 +128,8 @@ nav {
 }
 .post {
     min-height: 150px;
-    max-width: 500px;
+
+    max-width: 550px;
     margin-left: auto;
     margin-right: auto;
     padding: 5px 20px 5px 20px;

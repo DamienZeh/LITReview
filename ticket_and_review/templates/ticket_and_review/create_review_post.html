@@ -4,6 +4,8 @@
         <h2>Créer une review</h2>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            {{ ticket_form.title }}
+            {{ ticket_form.description }}
             <p>Titre</p>
             <p class="champs">{{ review_form.headline }}</p>
             <p>Note</p>

@@ -5,9 +5,6 @@ from . models import UserFollows, Ticket, Review
 
 User = get_user_model()
 
-class FluxForm(forms.Form):
-    pass
-
 
 class TicketForm(forms.ModelForm):
     title = forms.CharField(label='Titre', widget=forms.Textarea(attrs={'class': 'form-control',

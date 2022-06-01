@@ -9,7 +9,7 @@ class TicketAdmin(admin.ModelAdmin):
 
 class ReviewAdmin(admin.ModelAdmin):
     """Show ticket's info in admin"""
-    list_display = ("ticket",'headline', 'body', 'user', 'rating', 'time_created')
+    list_display = ('ticket','headline', 'body', 'user', 'rating', 'time_created')
 
 class UserFollowsAdmin(admin.ModelAdmin):
     """Show userfollows's info in admin"""

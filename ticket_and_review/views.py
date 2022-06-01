@@ -66,30 +66,100 @@ def image_upload(request):
 @login_required
 def ticket_and_image_upload(request):
     ticket_form = TicketForm()
+    review_form = ReviewForm()
     if request.method == 'POST':
         ticket_form = TicketForm(request.POST, request.FILES)
-        if ticket_form.is_valid():
-            ticket = ticket_form.save(commit=False)
-            ticket.user = request.user
-            ticket.save()
+        review_form = TicketForm(request.POST, request.FILES)
+        if ticket_form.is_valid() and review_form.is_valid():
+            ticket_form.instance.user = request.user
+            review_form.instance.user = request.user
+            ticket = ticket_form.save()
+            review_form.instance.ticket = ticket
+            review_form.save()
+
             return redirect('flux')
     context = {
-        'ticket_form': ticket_form
+        'ticket_form': ticket_form,
+        'review_form': review_form
         }
     return render(request, 'ticket_and_review/create_ticket_post.html', context=context)
 
+"""
+@login_required
+def review_upload(request ):
+    if request.method == 'GET':
+        form_review = ReviewForm()
+        form_ticket = TicketForm()
+        html = './ticket_and_review/create_review_post.html'
+        context = {
+            'form_review': form_review, 'form_ticket': form_ticket
+        }
+        return render(request, html, context)
+
+    elif request.method == 'POST':
+        form_review = ReviewForm(data=request.POST, files=request.FILES)
+        form_ticket = TicketForm(data=request.POST, files=request.FILES)
+
+        html = './ticket_and_review/create_review_post.html'
+        context = {
+            'review_form': form_review, 'ticket_form': form_ticket
+        }
+
+        if form_review.is_valid() and form_ticket.is_valid():
+            form_ticket.instance.user = request.user
+            ticket = form_ticket.save()
+            form_review.instance.ticket = ticket
+            form_review.instance.user = request.user
+            form_review.save()
+
+            return redirect('flux')
+
+        return render(request, html, context)
+"""
+
 @login_required
 def review_upload(request):
+
     review_form = ReviewForm()
+    ticket_form = TicketForm()
     if request.method == 'POST':
+        ticket_form = ReviewForm(request.POST, request.FILES)
         review_form = ReviewForm(request.POST, request.FILES)
         if review_form.is_valid():
+            ticket = ticket_form.save(commit=False)
+            review = review_form.save(commit=False)
+            ticket.user = request.user
+            review.user = request.user
+            ticket.save()
+            review.save()
+
+            return redirect('flux')
+    context = {
+         'review_form': review_form,
+        'ticket_form': ticket_form,
+        }
+
+    return render(request, 'ticket_and_review/create_review_post.html', context=context)
+
+
+@login_required
+def review_upload_response(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    review_form = ReviewForm()
+    ticket_form = TicketForm()
+    if request.method == 'GET':
+        review_form = ReviewForm(request.POST, request.FILES)
+        if review_form.is_valid():
+            ticket_form.instance.user = request.user
+            ticket = ticket_form.save()
+            review_form.instance.ticket = ticket.pk
             review = review_form.save(commit=False)
             review.user = request.user
             review.save()
             return redirect('flux')
     context = {
-         'review_form': review_form
+         'review_form': review_form,
+         'ticket': ticket
         }
     return render(request, 'ticket_and_review/create_review_post.html', context=context)
 

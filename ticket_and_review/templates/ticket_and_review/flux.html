@@ -5,12 +5,15 @@
             <p class="left_btn"><a href="{% url 'ticket_create' %}">
                 <button type="button" name='ticket'>Demander une critique</button></a>
             </p>
+
             <p class="right_btn"><a href="{% url 'review_create' %}">
                 <button type="button" name='review'>Créer une critique</button></a>
             </p>
+
      </div>
     {% csrf_token %}
      <div class="grid-container">
+
         {% for post in posts %}
             {% if post.content_type == 'TICKET' %}
                 <div class="post">
@@ -25,14 +28,15 @@
                     {% if post.image %}
                         <img src="{{ post.image.url }}">
                     {% endif %}
-
+                    {% if post.user != request.user %}
                     <p class="ticket_review corner_btn"><a href="{% url 'review_create' %}">
                         <button type="button" name='review'>Créer une critique</button></a>
                     </p>
+                     {% endif %}
                 </div>
             {% elif post.content_type == 'REVIEW' %}
                 <div class="post">
-                     <p class="date">{{ post.time_created }}</p>
+                    <p class="date">{{ post.time_created }}</p>
                     {% if post.user == request.user %}
                         <p><strong>Vous</strong> avez publié une critique</p>
                     {% else %}
@@ -57,6 +61,7 @@
                     <p class="content comment">{{ post.body | safe }}</p>
                 </div>
             {% endif %}
+
         {% endfor %}
     </div>
 </form>
