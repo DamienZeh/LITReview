@@ -35,6 +35,9 @@
                      {% endif %}
                 </div>
             {% elif post.content_type == 'REVIEW' %}
+                  {% if post %}
+                    <p>{{ post.title }}</p>
+                 {% endif %}
                 <div class="post">
                     <p class="date">{{ post.time_created }}</p>
                     {% if post.user == request.user %}

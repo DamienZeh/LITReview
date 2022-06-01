@@ -22,10 +22,10 @@
                     {% endif %}
                     <div class="modif_sup_btn">
                         <p class="ticket_review modif_btn">
-                            <a href="{% url 'edit_ticket' post.id %}">
+                            <a href="{% url 'edit_post' post.id %}">
                                 <button type="button" name='review'>Modifier</button></a></p>
                         <p class="ticket_review modif_btn">
-                            <a href="{% url 'delete_ticket' post.id %}">
+                            <a href="{% url 'delete_post' post.id %}">
                                 <button type="button" name='review'>Supprimer</button></a></p>
                     </div>
                 </div>
@@ -55,10 +55,10 @@
                         <p class="content comment">{{ post.body | safe }}</p>
                         <div class="modif_sup_btn">
                             <p class="ticket_review modif_btn">
-                                <a href="{% url 'edit_review' post.id %}">
+                                <a href="{% url 'edit_post' post.id %}">
                                     <button type="button" name='review'>Modifier</button></a></p>
                             <p class="ticket_review modif_btn">
-                                <a href="{% url 'delete_review' post.id %}">
+                                <a href="{% url 'delete_post' post.id %}">
                                     <button type="button" name='review'>Supprimer</button></a></p>
                         </div>
                     </div>
