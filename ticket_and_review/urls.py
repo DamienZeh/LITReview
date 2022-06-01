@@ -4,7 +4,7 @@ from django.urls import path
 from .views import flux_page as flux, posts_page as posts,\
     subscription_page as subscription, ticket_creation, image_upload,\
     view_ticket, edit_post, delete_post, unfollow,\
-    review_creation
+    review_creation, auto_review_creation
 
 urlpatterns = [
     path('flux/', flux, name="flux"),
@@ -13,6 +13,7 @@ urlpatterns = [
     path('image/upload/', image_upload, name='image_upload'),
     path('ticket/create', ticket_creation, name='ticket_create'),
     path('review/create/', review_creation, name='review_create'),
+    path('review/auto_create/', auto_review_creation, name='auto_review_create'),
     path('ticket/<int:ticket_id>', view_ticket, name='view_ticket'),
     path('ticket/<int:post_id>/edit', edit_post, name='edit_post'),
     path('ticket/<int:post_id>/delete', delete_post, name='delete_post'),

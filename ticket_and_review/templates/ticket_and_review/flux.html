@@ -6,7 +6,7 @@
                 <button type="button" name='ticket'>Demander une critique</button></a>
             </p>
 
-            <p class="right_btn"><a href="{% url 'review_create' %}">
+            <p class="right_btn"><a href="{% url 'auto_review_create' %}">
                 <button type="button" name='review'>Créer une critique</button></a>
             </p>
 
@@ -35,10 +35,37 @@
                      {% endif %}
                 </div>
             {% elif post.content_type == 'REVIEW' %}
-                  {% if post %}
-                    <p>{{ post.title }}</p>
-                 {% endif %}
                 <div class="post">
+                    <p class="date">{{ post.time_created }}</p>
+                    {% if post.user == request.user %}
+                        <p><strong>Vous</strong> avez publié une critique</p>
+                    {% else %}
+                        <p><strong>{{ post.user }}</strong> a publié une critique</p>
+                    {% endif %}
+                    <div class="title-review-&-rating">
+                        <div class="title-review"> <h4>{{ post.headline }}</h4></div>
+                        {% if post.rating == 0 %}
+                            <div class="rating"><p> - &#9734;&#9734;&#9734;&#9734;&#9734;<p></div>
+                        {% elif post.rating == 1 %}
+                            <div class="rating"><p> - &#9733;&#9734;&#9734;&#9734;&#9734;<p></div>
+                        {% elif post.rating == 2 %}
+                            <div class="rating"><p> - &#9733;&#9733;&#9734;&#9734;&#9734;<p></div>
+                        {% elif post.rating == 3 %}
+                            <div class="rating"><p> - &#9733;&#9733;&#9733;&#9734;&#9734;<p></div>
+                        {% elif post.rating == 4 %}
+                            <div class="rating"><p> - &#9733;&#9733;&#9733;&#9733;&#9734;<p></div>
+                        {% elif post.rating == 5 %}
+                            <div class="rating"><p> - &#9733;&#9733;&#9733;&#9733;&#9733;<p></div>
+                        {% endif %}
+                    </div>
+                    <p class="content comment">{{ post.body | safe }}</p>
+                </div>
+            {% elif post.content_type == 'AUTOREVIEW' %}
+
+                <div class="post">
+                    <p>test</p>
+                    <p>{{ post.title }}</p>
+                    <p>{{ post.description }}</p>
                     <p class="date">{{ post.time_created }}</p>
                     {% if post.user == request.user %}
                         <p><strong>Vous</strong> avez publié une critique</p>

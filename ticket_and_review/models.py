@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 
 
 class Ticket(models.Model):
-
     title = models.CharField(max_length=128, verbose_name='Titre')
     description = models.TextField(max_length=5000, verbose_name='Description', blank=True)
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -27,7 +26,7 @@ class Ticket(models.Model):
         else:
             self.image = None
 
-    def __str__(self):# show ticket in admin with their titles
+    def __str__(self):
         return self.title
 
 
@@ -40,6 +39,35 @@ class Review(models.Model):
     user = models.ForeignKey(
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     time_created = models.DateTimeField(auto_now_add=True)
+
+
+class AutoReview(models.Model):
+    title = models.CharField(max_length=128, verbose_name='Titre')
+    description = models.TextField(max_length=5000, verbose_name='Description', blank=True)
+    image = models.ImageField(null=True, blank=True, verbose_name='image', upload_to='./')
+    rating = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(0), MaxValueValidator(5)])
+    headline = models.CharField(max_length=128)
+    body = models.CharField(max_length=8192, blank=True)
+    user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    time_created = models.DateTimeField(auto_now_add=True)
+    IMAGE_MAX_SIZE = (200, 200)
+
+    def resize_image(self):
+        image = Picture.open(self.image)
+        image.thumbnail(self.IMAGE_MAX_SIZE)
+        image.save(self.image.path)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.image:
+            self.resize_image()
+        else:
+            self.image = None
+
+    def __str__(self):
+        return self.title
 
 
 class UserFollows(models.Model):

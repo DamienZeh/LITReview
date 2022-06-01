@@ -4,18 +4,21 @@
         <h2>Créer une review</h2>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            <p>{{ auto_review_form.title }}</p>
+            <p>{{ auto_review_form.description }}</p>
+            <p>{{ auto_review_form.image }}</p>
+             <div class="fake-btn3">
+                 <p>Télécharger fichier</p>
+             </div>
             <p>Titre</p>
-            <p class="champs">{{ review_form.headline }}</p>
+            <p class="champs">{{ auto_review_form.headline }}</p>
             <p>Note</p>
-            {% for rate in review_form.rating %}
+            {% for rate in auto_review_form.rating %}
                 {{ rate }}
             {% endfor %}
             <p>Commentaire</p>
-            <p class="champs">{{ review_form.body }}</p>
-
-
+            <p class="champs">{{ auto_review_form.body }}</p>
              <br><br><br><br>
-
             <div class="save">
                 <button class="save-btn1" type="submit" >Envoyer</button>
             </div>

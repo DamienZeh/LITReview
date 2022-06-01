@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404, render, redirect
 from django.db.models import Q
-from .forms import TicketForm, DeletePostForm, ReviewForm
-from .models import Ticket, UserFollows, Review
+from .forms import TicketForm, DeletePostForm, ReviewForm, AutoReviewForm
+from .models import Ticket, UserFollows, Review, AutoReview
 from itertools import chain
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
@@ -22,9 +22,11 @@ def get_posts(request):
 
     tickets = Ticket.objects.filter(Q(user=request.user) | Q(user__in=users_followed))
     reviews = Review.objects.filter(Q(user=request.user) | Q(user__in=users_followed))
+    auto_reviews = AutoReview.objects.filter(Q(user=request.user) | Q(user__in=users_followed))
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
     reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
-    all_posts = sorted(chain(reviews, tickets),
+    auto_reviews = auto_reviews.annotate(content_type=Value('AUTOREVIEW', CharField()))
+    all_posts = sorted(chain(reviews, tickets, auto_reviews),
                    key= lambda post: post.time_created, reverse=True)
     return all_posts
 
@@ -82,47 +84,34 @@ def ticket_creation(request):
 @login_required
 def review_creation(request):
     review_form = ReviewForm()
-    ticket_form = TicketForm()
     if request.method == 'POST':
-        ticket_form = ReviewForm(request.POST, request.FILES)
         review_form = ReviewForm(request.POST, request.FILES)
         if review_form.is_valid():
-            ticket = ticket_form.save(commit=False)
             review = review_form.save(commit=False)
-            ticket.user = request.user
             review.user = request.user
-            ticket.save()
             review.save()
-
             return redirect('flux')
     context = {
          'review_form': review_form,
-        'ticket_form': ticket_form,
         }
-
     return render(request, 'ticket_and_review/create_review_post.html', context=context)
+
 
 
 @login_required
-def review_creation_response(request, ticket_id):
-    ticket = get_object_or_404(Ticket, id=ticket_id)
-    review_form = ReviewForm()
-    ticket_form = TicketForm()
-    if request.method == 'GET':
-        review_form = ReviewForm(request.POST, request.FILES)
-        if review_form.is_valid():
-            ticket_form.instance.user = request.user
-            ticket = ticket_form.save()
-            review_form.instance.ticket = ticket.pk
-            review = review_form.save(commit=False)
-            review.user = request.user
-            review.save()
+def auto_review_creation(request):
+    auto_review_form = AutoReviewForm()
+    if request.method == 'POST':
+        auto_review_form = AutoReviewForm(request.POST, request.FILES)
+        if auto_review_form.is_valid():
+            auto_review = auto_review_form.save(commit=False)
+            auto_review.user = request.user
+            auto_review.save()
             return redirect('flux')
     context = {
-         'review_form': review_form,
-         'ticket': ticket
+         'auto_review_form': auto_review_form,
         }
-    return render(request, 'ticket_and_review/create_review_post.html', context=context)
+    return render(request, 'ticket_and_review/create_auto_review_post.html', context=context)
 
 
 @login_required
@@ -194,6 +183,3 @@ def delete_post(request, post_id):
         'delete_form': delete_form,
         }
     return render(request, 'ticket_and_review/delete_post.html', context=context)
-
-
-
