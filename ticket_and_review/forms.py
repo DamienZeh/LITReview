@@ -35,7 +35,7 @@ class AutoReviewForm(forms.ModelForm):
     title = forms.CharField(label='Titre', widget=forms.Textarea(attrs={'class': 'form-control',
                            'placeholder': 'Titre du livre + auteur', 'cols': 60, 'rows': 1}))
     description = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'form-control',
-                           'placeholder': 'Pas obligatoire.', 'cols': 60}))
+                           'placeholder': 'Description.', 'cols': 60}))
     image = forms.ImageField(label='', required=False, error_messages={'invalid': "Image files only"},
                              widget=forms.FileInput(attrs={'class': 'django_btn'}))
     headline = forms.CharField(label='Titre', widget=forms.Textarea(attrs={'class': 'form-control',

@@ -1,15 +1,21 @@
 {% extends 'ticket_and_review/base.html' %}
 {% block content %}
-    <div class="post create_ticket">
-        <h2>Créer une review</h2>
+    <div class="post create_autoreview">
+        <h2>Créer une critique</h2>
+        <p class="onglet">Livre/ Article</p>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
+             <p>Titre</p>
             <p>{{ auto_review_form.title }}</p>
+             <p>Description</p>
             <p>{{ auto_review_form.description }}</p>
+            <p>Image</p>
             <p>{{ auto_review_form.image }}</p>
              <div class="fake-btn3">
                  <p>Télécharger fichier</p>
              </div>
+            <div class="trait2"><hr></div>
+            <p class="onglet">Critique</p>
             <p>Titre</p>
             <p class="champs">{{ auto_review_form.headline }}</p>
             <p>Note</p>
@@ -18,9 +24,9 @@
             {% endfor %}
             <p>Commentaire</p>
             <p class="champs">{{ auto_review_form.body }}</p>
-             <br><br><br><br>
+             <br>
             <div class="save">
-                <button class="save-btn1" type="submit" >Envoyer</button>
+                <button class="save-btn3" type="submit" >Envoyer</button>
             </div>
         </form>
     </div>

@@ -87,6 +87,19 @@ nav {
     margin-right: auto;
     display:flex;
 }
+.trait2{
+    position: relative;
+    margin: 5px;
+    width:540px;
+    height:1px;
+    top: -17px;
+    overflow:hidden;
+    background-color: grey;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    display:flex;
+}
 .errorlist{
     text-align: left;
     overflow:hidden;
@@ -180,6 +193,14 @@ nav {
 .post h2 {
     text-align: center;
 }
+.create_autoreview h2 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.create_autoreview p {
+    margin-top: 5px;
+    margin-bottom: 13px;
+}
 .none_posts {
     text-align: center;
     color: white;
@@ -223,7 +244,7 @@ nav {
 /* Fin posts page */
 
 /* page modif et delete ticket */
-.save-btn1 {
+.save-btn1, .save-btn3 {
     position: relative;
     top: -77px;
 }
@@ -231,7 +252,7 @@ nav {
     position: relative;
     top: -5px;
 }
-.save-btn1, .save-btn2, .delete-btn, .fake-btn, .fake-btn2{
+.save-btn1, .save-btn2, .save-btn3, .delete-btn, .fake-btn, .fake-btn2, .fake-btn3{
     color: black;
     font-size: 14px;
     width: 130px;
@@ -243,6 +264,9 @@ nav {
     text-align: center;
     margin-bottom: 10px;
 }
+.save-btn3 {
+    top: -10px;
+}
 .title {
     text-align: center;
     color: white;
@@ -253,14 +277,15 @@ nav {
 .save {
     text-align: right;
 }
-.fake-btn, .fake-btn2 {
+.fake-btn, .fake-btn2, .fake-btn3 {
     position: relative;
     top: -20px;
     width:184px;
     height: 30px;
     cursor: auto;
+    background-color: white;
 }
-.fake-btn p{
+.fake-btn p, .fake-btn3 p{
     margin-top: 7px;
 }
 .fake-btn2 {
@@ -273,6 +298,10 @@ nav {
 }
 .fake-btn2 p{
     margin-top: 7px;
+}
+.fake-btn3{
+    top: -45px;
+    pointer-events: none
 }
 .django_btn {
     opacity: 0%;
@@ -287,6 +316,14 @@ nav {
 .image_txt {
     position: relative;
     top: -77px;
+}
+p.onglet{
+    position: relative;
+    top: -10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 14px;
+    font-style: italic;
 }
 /* Fin page modif et delete ticket */
 
