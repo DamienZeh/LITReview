@@ -90,6 +90,7 @@ def review_creation(request):
             review = review_form.save(commit=False)
             review.user = request.user
             review.save()
+
             return redirect('flux')
     context = {
          'review_form': review_form,
@@ -107,6 +108,11 @@ def auto_review_creation(request):
             auto_review = auto_review_form.save(commit=False)
             auto_review.user = request.user
             auto_review.save()
+            Ticket.objects.create(title=auto_review.title,
+                                  description=auto_review.description,
+                                  user=request.user, image=auto_review.image,
+                                  time_created=auto_review.time_created)
+
             return redirect('flux')
     context = {
          'auto_review_form': auto_review_form,
@@ -147,14 +153,19 @@ def unfollow(request, user_follows_id):
 
 @login_required
 def edit_post(request, post_id):
+
     try:
         post = Ticket.objects.get(id=post_id)
         form = TicketForm
-        html =  'ticket_and_review/edit_post.html'
+        html = 'ticket_and_review/edit_post.html'
     except ObjectDoesNotExist:
-        post = Review.objects.get(id=post_id)
-        form = ReviewForm
-        html =  'ticket_and_review/edit_review.html'
+        try:
+            post = Review.objects.get(id=post_id)
+            form = ReviewForm
+        except ObjectDoesNotExist:
+            post = AutoReview.objects.get(id=post_id)
+            form = ReviewForm
+        html = 'ticket_and_review/edit_review.html'
     edit_form = form(instance=post)
     if request.method == 'POST':
         edit_form = form(request.POST or None, request.FILES or None, instance=post)
@@ -172,7 +183,11 @@ def delete_post(request, post_id):
     try:
         post = Ticket.objects.get(id=post_id)
     except ObjectDoesNotExist:
-        post = Review.objects.get(id=post_id)
+        try:
+            post = Review.objects.get(id=post_id)
+        except ObjectDoesNotExist:
+            post = AutoReview.objects.get(id=post_id)
+
     delete_form = DeletePostForm()
     if request.method == 'POST':
         delete_form = DeletePostForm(request.POST)

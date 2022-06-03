@@ -42,6 +42,7 @@ class Review(models.Model):
 
 
 class AutoReview(models.Model):
+    ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=128, verbose_name='Titre')
     description = models.TextField(max_length=5000, verbose_name='Description', blank=True)
     image = models.ImageField(null=True, blank=True, verbose_name='image', upload_to='./')

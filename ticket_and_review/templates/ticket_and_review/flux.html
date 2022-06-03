@@ -63,15 +63,8 @@
             {% elif post.content_type == 'AUTOREVIEW' %}
 
                 <div class="post">
-                    <p>test</p>
-                    <p>{{ post.title }}</p>
-                    <p>{{ post.description }}</p>
-                    <p class="date">{{ post.time_created }}</p>
-                    {% if post.user == request.user %}
-                        <p><strong>Vous</strong> avez publié une critique</p>
-                    {% else %}
-                        <p><strong>{{ post.user }}</strong> a publié une critique</p>
-                    {% endif %}
+                     <p class="date">{{ post.time_created }}</p>
+                     <p><strong>Vous</strong> avez publié une critique</p>
                     <div class="title-review-&-rating">
                         <div class="title-review"> <h4>{{ post.headline }}</h4></div>
                         {% if post.rating == 0 %}
@@ -88,7 +81,16 @@
                             <div class="rating"><p> - &#9733;&#9733;&#9733;&#9733;&#9733;<p></div>
                         {% endif %}
                     </div>
-                    <p class="content comment">{{ post.body | safe }}</p>
+                    <p class="comment2">{{ post.body | safe }}</p>
+                    <div class="ticket_in_review">
+                        <p class="date">{{ post.time_created }}</p>
+                        <p>Ticket - <strong>Vous</strong></p>
+                        <p>{{ post.title }}</p>
+                        <p>{{ post.description }}</p>
+                        {% if post.image %}
+                            <img src="{{ post.image.url }}">
+                        {% endif %}
+                    </div>
                 </div>
             {% endif %}
 

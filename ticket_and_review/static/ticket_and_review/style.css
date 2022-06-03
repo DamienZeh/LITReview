@@ -161,6 +161,12 @@ nav {
     margin-top: 25px;
     overflow: hidden;
 }
+.post .comment2 {
+    position: relative;
+    top:-10px;
+    margin: 0px;
+    padding-top: 0px;
+}
 .post h4{
     margin-top: 10px;
     padding-top: 10px;
@@ -324,6 +330,13 @@ p.onglet{
     margin-bottom: 0px;
     font-size: 14px;
     font-style: italic;
+}
+.ticket_in_review {
+    border:  0.6mm solid  rgb(180, 175, 118);
+    background-color: rgba(230, 230, 230);
+    border-radius: 7px;
+    box-shadow: -1px 2px 10px 3px rgba(0, 0, 0, 0.15) inset;
+    padding:8px 13px 5px 13px;
 }
 /* Fin page modif et delete ticket */
 
