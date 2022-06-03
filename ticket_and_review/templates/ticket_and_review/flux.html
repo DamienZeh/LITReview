@@ -29,13 +29,14 @@
                         <img src="{{ post.image.url }}">
                     {% endif %}
                     {% if post.user != request.user %}
-                    <p class="ticket_review corner_btn"><a href="{% url 'review_create' %}">
+                    <p class="ticket_review corner_btn"><a href="{% url 'review_create' post.id %}">
                         <button type="button" name='review'>Créer une critique</button></a>
                     </p>
                      {% endif %}
                 </div>
             {% elif post.content_type == 'REVIEW' %}
                 <div class="post">
+                    <p>{{ post.ticket.title }}</p>
                     <p class="date">{{ post.time_created }}</p>
                     {% if post.user == request.user %}
                         <p><strong>Vous</strong> avez publié une critique</p>

@@ -82,18 +82,22 @@ def ticket_creation(request):
 
 
 @login_required
-def review_creation(request):
+def review_creation(request, ticket_id):
     review_form = ReviewForm()
+    ticket = Ticket.objects.get(id=ticket_id)
     if request.method == 'POST':
         review_form = ReviewForm(request.POST, request.FILES)
         if review_form.is_valid():
             review = review_form.save(commit=False)
+            review.ticket = ticket
             review.user = request.user
             review.save()
+
 
             return redirect('flux')
     context = {
          'review_form': review_form,
+         'ticket': ticket,
         }
     return render(request, 'ticket_and_review/create_review_post.html', context=context)
 
