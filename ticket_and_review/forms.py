@@ -25,7 +25,7 @@ class ReviewForm(forms.ModelForm):
     body = forms.CharField(label='Description', widget=forms.Textarea(attrs={'class': 'form-control',
                     'placeholder': 'Commentaire de la critique.', 'cols': 60}))
 
-    number_rating = (('0', 0), ('1', 1), ('2', 2), ('3', 3), ('4', 4), ('5', 5))
+    number_rating = (('0', ' - 0'), ('1', ' - 1'), ('2', ' - 2'), ('3', ' - 3'), ('4', ' - 4'), ('5', ' - 5'))
     rating = forms.ChoiceField(widget=forms.RadioSelect, choices= number_rating)
     class Meta:
         model = Review
@@ -43,7 +43,7 @@ class AutoReviewForm(forms.ModelForm):
     body = forms.CharField(label='Description', widget=forms.Textarea(attrs={'class': 'form-control',
                     'placeholder': 'Commentaire de la critique.', 'cols': 60}))
 
-    number_rating = (('0', 0), ('1', 1), ('2', 2), ('3', 3), ('4', 4), ('5', 5))
+    number_rating = (('0', ' - 0'), ('1', ' - 1'), ('2', ' - 2'), ('3', ' - 3'), ('4', ' - 4'), ('5', ' - 5'))
     rating = forms.ChoiceField(widget=forms.RadioSelect, choices= number_rating)
     class Meta:
         model = AutoReview
