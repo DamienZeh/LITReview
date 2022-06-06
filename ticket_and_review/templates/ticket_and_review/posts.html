@@ -10,7 +10,6 @@
         {% endif %}
         {% for post in posts %}
 
-
             {% if post.content_type == 'TICKET' and post.user == request.user %}
                 <div class="post">
                     <p class="date">{{ post.time_created }}</p>
@@ -31,7 +30,6 @@
                 </div>
             {% elif post.content_type == 'REVIEW' and post.user == request.user %}
                 <div class="post">
-                    <p>{{ post.ticket.title }}</p>
                      <p class="date">{{ post.time_created }}</p>
                     {% if post.user == request.user %}
                         <p><strong>Vous</strong> avez publié une critique</p>
@@ -54,6 +52,15 @@
                             <div class="rating"><p> - &#9733;&#9733;&#9733;&#9733;&#9733;<p></div>
                         {% endif %}
                         <p class="content comment">{{ post.body | safe }}</p>
+                        <div class="ticket_in_review">
+                        <p class="date">{{ post.ticket.time_created }}</p>
+                        <p>Ticket - <strong>{{ post.ticket.user }}</strong></p>
+                        <p>{{ post.ticket.title }}</p>
+                        <p>{{ post.ticket.description }}</p>
+                        {% if post.ticket.image %}
+                            <img src="{{ post.ticket.image.url }}">
+                        {% endif %}
+                    </div>
                         <div class="modif_sup_btn">
                             <p class="ticket_review modif_btn">
                                 <a href="{% url 'edit_post' post.id %}">
@@ -63,9 +70,8 @@
                                     <button type="button" name='review'>Supprimer</button></a></p>
                         </div>
                     </div>
-
                 </div>
-                {% elif post.content_type == 'AUTOREVIEW' %}
+                {% elif post.content_type == 'AUTOREVIEW' and post.user == request.user %}
                 <div class="post">
                      <p class="date">{{ post.time_created }}</p>
                      <p><strong>Vous</strong> avez publié une critique</p>
@@ -89,10 +95,10 @@
                     <div class="ticket_in_review">
                         <p class="date">{{ post.time_created }}</p>
                         <p>Ticket - <strong>Vous</strong></p>
-                        <p>{{ post.title }}</p>
-                        <p>{{ post.description }}</p>
-                        {% if post.image %}
-                            <img src="{{ post.image.url }}">
+                        <p>{{ post.ticket.title }}</p>
+                        <p>{{ post.ticket.description }}</p>
+                        {% if post.ticket.image %}
+                            <img src="{{ post.ticket.image.url }}">
                         {% endif %}
                     </div>
                         <div class="modif_sup_btn">

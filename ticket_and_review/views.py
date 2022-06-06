@@ -19,9 +19,8 @@ def get_posts(request):
     users_followed = []
     for user in UserFollows.objects.filter(user=request.user):
         users_followed.append(user.followed_user)
-
     tickets = Ticket.objects.filter(Q(user=request.user) | Q(user__in=users_followed))
-    reviews = Review.objects.filter(Q(user=request.user) | Q(user__in=users_followed))
+    reviews = Review.objects.filter(Q(user=request.user) | Q(ticket__user=request.user) | Q(user__in=users_followed))
     auto_reviews = AutoReview.objects.filter(Q(user=request.user) | Q(user__in=users_followed))
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
     reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
@@ -90,6 +89,8 @@ def review_creation(request, ticket_id):
         if review_form.is_valid():
             review = review_form.save(commit=False)
             review.ticket = ticket
+            ticket.review_existing = True
+            ticket.save()
             review.user = request.user
             review.save()
 
@@ -110,12 +111,15 @@ def auto_review_creation(request):
         auto_review_form = AutoReviewForm(request.POST, request.FILES)
         if auto_review_form.is_valid():
             auto_review = auto_review_form.save(commit=False)
-            auto_review.user = request.user
-            auto_review.save()
-            Ticket.objects.create(title=auto_review.title,
+            ticket = Ticket.objects.create(title=auto_review.title,
                                   description=auto_review.description,
                                   user=request.user, image=auto_review.image,
-                                  time_created=auto_review.time_created)
+                                  time_created=auto_review.time_created,
+                                  review_existing = True)
+            auto_review.ticket=ticket
+            auto_review.user = request.user
+            auto_review.save()
+
 
             return redirect('flux')
     context = {
@@ -178,6 +182,7 @@ def edit_post(request, post_id):
             return redirect('posts')
     context = {
         'edit_form': edit_form,
+        'post': post
         }
     return render(request, html, context=context)
 

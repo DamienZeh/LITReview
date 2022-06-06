@@ -100,6 +100,19 @@ nav {
     margin-right: auto;
     display:flex;
 }
+.trait3{
+    position: relative;
+    margin: 5px;
+    width:540px;
+    height:1px;
+    top: -5px;
+    overflow:hidden;
+    background-color: grey;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    display:flex;
+}
 .errorlist{
     text-align: left;
     overflow:hidden;
@@ -158,7 +171,7 @@ nav {
     font-size: 0.9em;
 }
 .post .content {
-    margin-top: 25px;
+    margin-top: 15px;
     overflow: hidden;
 }
 .post .comment2 {
@@ -258,7 +271,7 @@ nav {
     position: relative;
     top: -5px;
 }
-.save-btn1, .save-btn2, .save-btn3, .delete-btn, .fake-btn, .fake-btn2, .fake-btn3{
+.save-btn1, .save-btn2, .save-btn3, .save-btn4, .delete-btn, .fake-btn, .fake-btn2, .fake-btn3{
     color: black;
     font-size: 14px;
     width: 130px;
@@ -323,13 +336,18 @@ nav {
     position: relative;
     top: -77px;
 }
-p.onglet{
+p.onglet, p.onglet2{
     position: relative;
     top: -10px;
-    margin-top: 0px;
     margin-bottom: 0px;
     font-size: 14px;
     font-style: italic;
+}
+p.onglet{
+    margin-top: 10px;
+}
+p.onglet2{
+    margin-top: 15px;
 }
 .ticket_in_review {
     border:  0.6mm solid  rgb(180, 175, 118);

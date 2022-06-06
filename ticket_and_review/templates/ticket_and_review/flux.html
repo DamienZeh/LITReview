@@ -28,7 +28,7 @@
                     {% if post.image %}
                         <img src="{{ post.image.url }}">
                     {% endif %}
-                    {% if post.user != request.user %}
+                    {% if post.user != request.user and post.review_existing == False %}
                     <p class="ticket_review corner_btn"><a href="{% url 'review_create' post.id %}">
                         <button type="button" name='review'>Créer une critique</button></a>
                     </p>
@@ -36,7 +36,6 @@
                 </div>
             {% elif post.content_type == 'REVIEW' %}
                 <div class="post">
-                    <p>{{ post.ticket.title }}</p>
                     <p class="date">{{ post.time_created }}</p>
                     {% if post.user == request.user %}
                         <p><strong>Vous</strong> avez publié une critique</p>
@@ -60,9 +59,21 @@
                         {% endif %}
                     </div>
                     <p class="content comment">{{ post.body | safe }}</p>
+                    <div class="ticket_in_review">
+                        <p class="date">{{ post.ticket.time_created }}</p>
+                        {% if post.ticket.user == request.user %}
+                            <p>Ticket - <strong>Vous</strong></p>
+                        {% else %}
+                            <p>Ticket - <strong>{{ post.ticket.user }}</strong></p>
+                        {% endif %}
+                        <p>{{ post.ticket.title }}</p>
+                        <p>{{ post.ticket.description }}</p>
+                        {% if post.ticket.image %}
+                            <img src="{{ post.ticket.image.url }}">
+                        {% endif %}
+                    </div>
                 </div>
             {% elif post.content_type == 'AUTOREVIEW' %}
-
                 <div class="post">
                      <p class="date">{{ post.time_created }}</p>
                      <p><strong>Vous</strong> avez publié une critique</p>
