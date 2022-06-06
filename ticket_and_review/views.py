@@ -14,7 +14,7 @@ from django.db.models import CharField, Value
 @login_required
 def get_posts(request):
     """
-    Get all tickets user and users followed
+    Get all posts user and users followed
     """
     users_followed = []
     for user in UserFollows.objects.filter(user=request.user):
@@ -47,22 +47,6 @@ def posts_page(request):
 def view_ticket(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
     return render(request, 'ticket_and_review/view_ticket.html', {'ticket': ticket})
-
-
-@login_required
-def image_upload(request):
-    form = TicketForm().image
-    if request.method == 'POST':
-        form = TicketForm(request.POST, request.FILES)
-        if form.is_valid():
-            image = form.save(commit=False)
-            # set the uploader to the user before saving the model
-            image.uploader = request.user
-            # now we can save
-            image.save()
-            return redirect('flux')
-    return render(request, 'ticket_and_review/image_upload.html', context={'form': form})
-
 
 @login_required
 def ticket_creation(request):
@@ -161,11 +145,10 @@ def unfollow(request, user_follows_id):
 
 @login_required
 def edit_post(request, post_id):
-
     try:
         post = Ticket.objects.get(id=post_id)
         form = TicketForm
-        html = 'ticket_and_review/edit_post.html'
+        html = 'ticket_and_review/edit_ticket.html'
     except ObjectDoesNotExist:
         try:
             post = Review.objects.get(id=post_id)
