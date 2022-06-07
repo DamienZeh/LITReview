@@ -45,12 +45,12 @@ class Review(models.Model):
 
 class AutoReview(models.Model):
     """ Class for autoreview (ticket + review) """
-    ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE, null=True)
+    ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
     title = models.CharField(max_length=128, verbose_name='Titre')
     description = models.TextField(max_length=5000, verbose_name='Description', blank=True)
     image = models.ImageField(null=True, blank=True, verbose_name='image', upload_to='./')
-    rating = models.PositiveSmallIntegerField(
-        validators=[MinValueValidator(0), MaxValueValidator(5)])
+    rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(0),
+                                                          MaxValueValidator(5)])
     headline = models.CharField(max_length=128)
     body = models.TextField(max_length=8192, blank=True)
     user = models.ForeignKey(
