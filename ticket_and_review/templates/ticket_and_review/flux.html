@@ -95,12 +95,12 @@
                     </div>
                     <p class="comment2">{{ post.body | safe }}</p>
                     <div class="ticket_in_review">
-                        <p class="date">{{ post.time_created }}</p>
+                        <p class="date">{{ post.ticket.time_created }}</p>
                         <p>Ticket - <strong>Vous</strong></p>
-                        <p>{{ post.title }}</p>
-                        <p>{{ post.description }}</p>
-                        {% if post.image %}
-                            <img src="{{ post.image.url }}">
+                        <p>{{ post.ticket.title }}</p>
+                        <p>{{ post.ticket.description }}</p>
+                        {% if post.ticket.image %}
+                            <img src="{{ post.ticket.image.url }}">
                         {% endif %}
                     </div>
                 </div>
