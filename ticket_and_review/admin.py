@@ -5,11 +5,11 @@ from .models import Ticket, Review, AutoReview, UserFollows
 
 class TicketAdmin(admin.ModelAdmin):
     """Show ticket's info in admin"""
-    list_display = ('title', 'description', 'user', 'image', 'time_created')
+    list_display = ('title', 'description', 'user', 'image', 'time_created', 'review_existing')
 
 class ReviewAdmin(admin.ModelAdmin):
     """Show ticket's info in admin"""
-    list_display = ('ticket','headline', 'body', 'user', 'rating', 'time_created')
+    list_display = ('ticket', 'headline', 'body', 'user', 'rating', 'time_created')
 
 class AutoReviewAdmin(admin.ModelAdmin):
     """Show ticket's info in admin"""

@@ -120,7 +120,7 @@ def subscription_page(request):
         follow = request.POST['name']#get input name's user from html
         username = request.user
         try:
-            to_follow = User.objects.get(username=follow)# User instance
+            to_follow = User.objects.get(username=follow)
             if to_follow != username :
                 if UserFollows.objects.get_or_create\
                             (user=request.user, followed_user=to_follow) is False:

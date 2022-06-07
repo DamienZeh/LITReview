@@ -2,13 +2,16 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.conf import settings
 from django.db import models
 from PIL import Image as Picture
-from django import forms
 from django.contrib.auth.models import User
 
 
+user = User
+
+
 class Ticket(models.Model):
+    """ Class for ticket """
     title = models.CharField(max_length=128, verbose_name='Titre')
-    description = models.TextField(max_length=5000, verbose_name='Description', blank=True)
+    description = models.TextField(max_length=2048, verbose_name='Description', blank=True)
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     image = models.ImageField(null=True, blank=True, verbose_name='image', upload_to='./')
     time_created = models.DateTimeField(auto_now_add=True)
@@ -32,17 +35,19 @@ class Ticket(models.Model):
 
 
 class Review(models.Model):
-    ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE, null=True)
-    rating = models.PositiveSmallIntegerField(
-        validators=[MinValueValidator(0), MaxValueValidator(5)])
-    headline = models.CharField(max_length=128)
-    body = models.CharField(max_length=8192, blank=True)
+    """ Class for Review """
+    ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
+    rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(0),
+                                                          MaxValueValidator(5)])
     user = models.ForeignKey(
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    headline = models.CharField(max_length=128)
+    body = models.TextField(max_length=8192, blank=True)
     time_created = models.DateTimeField(auto_now_add=True)
 
 
 class AutoReview(models.Model):
+    """ Class for autoreview (ticket + review) """
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=128, verbose_name='Titre')
     description = models.TextField(max_length=5000, verbose_name='Description', blank=True)
@@ -50,7 +55,7 @@ class AutoReview(models.Model):
     rating = models.PositiveSmallIntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(5)])
     headline = models.CharField(max_length=128)
-    body = models.CharField(max_length=8192, blank=True)
+    body = models.TextField(max_length=8192, blank=True)
     user = models.ForeignKey(
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     time_created = models.DateTimeField(auto_now_add=True)
@@ -73,10 +78,10 @@ class AutoReview(models.Model):
 
 
 class UserFollows(models.Model):
-    # Your UserFollows model definition goes here
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='following')
-    followed_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='followed_by')
+    """ Class for  user and followed user """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE, related_name='following')
+    followed_user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                      on_delete=models.CASCADE, related_name='followed_by')
     class Meta:
-        # ensures we don't get multiple UserFollows instances
-        # for unique user-user_followed pairs
         unique_together = ('user', 'followed_user', )
