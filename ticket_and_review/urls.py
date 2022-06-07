@@ -13,8 +13,8 @@ urlpatterns = [
     path('ticket/create', ticket_creation, name='ticket_create'),
     path('review/create/<int:ticket_id>/', review_creation, name='review_create'),
     path('review/auto_create/', auto_review_creation, name='auto_review_create'),
-    path('ticket/<int:post_id>/edit', edit_post, name='edit_post'),
-    path('ticket/<int:post_id>/delete', delete_post, name='delete_post'),
+    path('ticket/<int:obj_id>/edit', edit_post, name='edit_post'),
+    path('ticket/<int:obj_id>/delete', delete_post, name='delete_post'),
     path('follow-users/', subscription, name='follow_users'),
     path('unfollow/<user_follows_id>', unfollow, name='unfollow'),
 ]

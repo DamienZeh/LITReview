@@ -5,9 +5,6 @@ from PIL import Image as Picture
 from django.contrib.auth.models import User
 
 
-user = User
-
-
 class Ticket(models.Model):
     """ Class for ticket """
     title = models.CharField(max_length=128, verbose_name='Titre')

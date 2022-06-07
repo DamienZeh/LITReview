@@ -144,47 +144,79 @@ def unfollow(request, user_follows_id):
 
 
 @login_required
-def edit_post(request, post_id):
+def edit_post(request, obj_id):
     try:
-        post = Ticket.objects.get(id=post_id)
+        obj = Ticket.objects.get(id=obj_id)
         form = TicketForm
         html = 'ticket_and_review/edit_ticket.html'
     except ObjectDoesNotExist:
         try:
-            post = Review.objects.get(id=post_id)
+            obj = Review.objects.get(id=obj_id)
             form = ReviewForm
         except ObjectDoesNotExist:
-            post = AutoReview.objects.get(id=post_id)
+            obj = AutoReview.objects.get(id=obj_id)
             form = ReviewForm
         html = 'ticket_and_review/edit_review.html'
-    edit_form = form(instance=post)
+    edit_form = form(instance=obj)
     if request.method == 'POST':
-        edit_form = form(request.POST or None, request.FILES or None, instance=post)
+        edit_form = form(request.POST or None, request.FILES or None, instance=obj)
         if edit_form.is_valid():
             edit_form.save()
             return redirect('posts')
     context = {
         'edit_form': edit_form,
-        'post': post
+        'post': obj
         }
     return render(request, html, context=context)
 
 
+"""
 @login_required
-def delete_post(request, post_id):
+def edit_post(request, obj_id):
     try:
-        post = Ticket.objects.get(id=post_id)
+        obj = Ticket.objects.get(id=obj_id)
+        form = TicketForm
+        html = 'ticket_and_review/edit_ticket.html'
+    except Ticket.DoesNotExist:
+        obj = Review.objects.get(id=obj_id)
+        form = ReviewForm
+        html = 'ticket_and_review/edit_review.html'
+    except Review.DoesNotExist:
+        obj = AutoReview.objects.get(id=obj_id)
+        form = AutoReviewForm
+        html = 'ticket_and_review/edit_review.html'
+    edit_form = form(instance=obj)
+    if request.method == 'POST':
+        edit_form = form(request.POST or None, request.FILES or None, instance=obj)
+        if edit_form.is_valid():
+            edit_form.save()
+            return redirect('posts')
+    context = {
+        'edit_form': edit_form,
+        'post': obj
+        }
+    return render(request, html, context=context)
+"""
+
+@login_required
+def delete_post(request, obj_id):
+    try:
+        obj = Ticket.objects.get(id=obj_id)
     except ObjectDoesNotExist:
         try:
-            post = Review.objects.get(id=post_id)
+            obj = Review.objects.get(id=obj_id)
         except ObjectDoesNotExist:
-            post = AutoReview.objects.get(id=post_id)
+            obj = AutoReview.objects.get(id=obj_id)
 
     delete_form = DeletePostForm()
     if request.method == 'POST':
         delete_form = DeletePostForm(request.POST)
         if delete_form.is_valid():
-            post.delete()
+            if isinstance(obj, Review):
+                obj.ticket.review_existing = False
+                obj.ticket.save()
+            obj.delete()
+
             return redirect('posts')
     context = {
         'delete_form': delete_form,
