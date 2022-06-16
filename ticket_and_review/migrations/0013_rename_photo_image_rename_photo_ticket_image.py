@@ -8,17 +8,17 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('ticket_and_review', '0012_rename_blog_ticket'),
+        ("ticket_and_review", "0012_rename_blog_ticket"),
     ]
 
     operations = [
         migrations.RenameModel(
-            old_name='Photo',
-            new_name='Image',
+            old_name="Photo",
+            new_name="Image",
         ),
         migrations.RenameField(
-            model_name='ticket',
-            old_name='photo',
-            new_name='image',
+            model_name="ticket",
+            old_name="photo",
+            new_name="image",
         ),
     ]

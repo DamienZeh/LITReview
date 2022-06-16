@@ -9,14 +9,14 @@
     {% csrf_token %}
     <div class="connexion">
         <div class="subscribe">
-             <p>Inscrivez-vous maintenant</p>
-            <a href="{% url 'signup' %}"><button type="button" name='back_main'>S'inscrire</button></a>
+            <p>Inscrivez-vous maintenant</p>
+            <a href="{% url 'signup' %}" class="btn-signup">S'inscrire</a>
         </div>
         <div class="ids">
             <p>Connectez-vous</p>
             <p>{{ form.username }}</p>
             <p>{{ form.password }}</p>
-             <button type="submit" >Se connecter</button>
+            <button type="submit" >Se connecter</button>
         </div>
     </div>
 </form>

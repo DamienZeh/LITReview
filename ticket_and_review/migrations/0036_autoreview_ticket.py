@@ -7,13 +7,17 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ticket_and_review', '0035_remove_autoreview_ticket'),
+        ("ticket_and_review", "0035_remove_autoreview_ticket"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='autoreview',
-            name='ticket',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='ticket_and_review.ticket'),
+            model_name="autoreview",
+            name="ticket",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="ticket_and_review.ticket",
+            ),
         ),
     ]

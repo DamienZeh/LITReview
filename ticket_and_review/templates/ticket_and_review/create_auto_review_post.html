@@ -5,15 +5,15 @@
         <p class="onglet">Livre/ Article</p>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-             <p>Titre</p>
+            <p>Titre</p>
             <p>{{ auto_review_form.title }}</p>
-             <p>Description</p>
+            <p>Description</p>
             <p>{{ auto_review_form.description }}</p>
             <p>Image</p>
             <p>{{ auto_review_form.image }}</p>
-             <div class="fake-btn3">
-                 <p>Télécharger fichier</p>
-             </div>
+            <div class="fake-btn3">
+                <p>Télécharger fichier</p>
+            </div>
             <div class="trait2"><hr></div>
             <p class="onglet">Critique</p>
             <p>Titre</p>
@@ -24,9 +24,10 @@
             {% endfor %}
             <p>Commentaire</p>
             <p class="champs">{{ auto_review_form.body }}</p>
-             <br>
+            <br>
             <div class="save">
-                <button class="save-btn3" type="submit" >Envoyer</button>
+                <button class=
+                    "save-btn3" type="submit">Envoyer</button>
             </div>
         </form>
     </div>

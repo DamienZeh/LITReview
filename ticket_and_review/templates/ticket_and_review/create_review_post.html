@@ -7,11 +7,13 @@
             <p>Vous êtes en train de poster en réponse à</p>
             <div class="ticket_in_review">
                 <p class="date">{{ ticket.time_created }}</p>
-                <p><strong>{{ ticket.user }}</strong> a demandé une critique</p>
+                <p><strong>{{ ticket.user }}
+                    </strong> a demandé une critique</p>
                 <p>{{ ticket.title }}</p>
                 <p>{{ ticket.description }}</p>
                 {% if ticket.image %}
-                    <img src="{{ ticket.image.url }}">
+                    <img src="{{ ticket.image.url }}" alt=
+                        "ticket-img">
                 {% endif %}
             </div>
             <br>
@@ -26,7 +28,8 @@
             <p>Commentaire</p>
             <p class="champs">{{ review_form.body }}</p>
             <div class="save">
-                <button class="save-btn4" type="submit" >Envoyer</button>
+                <button class="save-btn4" type=
+                    "submit">Envoyer</button>
             </div>
         </form>
     </div>

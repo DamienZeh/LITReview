@@ -6,17 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ticket_and_review', '0008_blog_content'),
+        ("ticket_and_review", "0008_blog_content"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='blog',
-            name='content',
+            model_name="blog",
+            name="content",
         ),
         migrations.AlterField(
-            model_name='blog',
-            name='description',
-            field=models.TextField(max_length=5000, verbose_name='contenu'),
+            model_name="blog",
+            name="description",
+            field=models.TextField(max_length=5000, verbose_name="contenu"),
         ),
     ]

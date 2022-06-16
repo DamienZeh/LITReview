@@ -6,13 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ticket_and_review', '0016_alter_ticket_image_delete_image'),
+        ("ticket_and_review", "0016_alter_ticket_image_delete_image"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='ticket',
-            name='image',
-            field=models.ImageField(blank=True, null=True, upload_to='images/', verbose_name='Image'),
+            model_name="ticket",
+            name="image",
+            field=models.ImageField(
+                blank=True,
+                null=True,
+                upload_to="images/",
+                verbose_name="Image",
+            ),
         ),
     ]

@@ -10,25 +10,55 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('ticket_and_review', '0021_userfollows'),
+        ("ticket_and_review", "0021_userfollows"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='ticket',
-            name='description',
-            field=models.TextField(blank=True, max_length=5000, verbose_name='Description'),
+            model_name="ticket",
+            name="description",
+            field=models.TextField(
+                blank=True, max_length=5000, verbose_name="Description"
+            ),
         ),
         migrations.CreateModel(
-            name='Review',
+            name="Review",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('rating', models.PositiveSmallIntegerField(validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(5)])),
-                ('headline', models.CharField(max_length=128)),
-                ('body', models.CharField(blank=True, max_length=8192)),
-                ('time_created', models.DateTimeField(auto_now_add=True)),
-                ('ticket', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ticket_and_review.ticket')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "rating",
+                    models.PositiveSmallIntegerField(
+                        validators=[
+                            django.core.validators.MinValueValidator(0),
+                            django.core.validators.MaxValueValidator(5),
+                        ]
+                    ),
+                ),
+                ("headline", models.CharField(max_length=128)),
+                ("body", models.CharField(blank=True, max_length=8192)),
+                ("time_created", models.DateTimeField(auto_now_add=True)),
+                (
+                    "ticket",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="ticket_and_review.ticket",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

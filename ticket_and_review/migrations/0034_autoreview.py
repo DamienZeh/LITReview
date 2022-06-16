@@ -10,23 +10,68 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('ticket_and_review', '0033_review_ticket'),
+        ("ticket_and_review", "0033_review_ticket"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='AutoReview',
+            name="AutoReview",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=128, verbose_name='Titre')),
-                ('description', models.TextField(blank=True, max_length=5000, verbose_name='Description')),
-                ('image', models.ImageField(blank=True, null=True, upload_to='./', verbose_name='image')),
-                ('rating', models.PositiveSmallIntegerField(validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(5)])),
-                ('headline', models.CharField(max_length=128)),
-                ('body', models.CharField(blank=True, max_length=8192)),
-                ('time_created', models.DateTimeField(auto_now_add=True)),
-                ('ticket', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='ticket_and_review.ticket')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "title",
+                    models.CharField(max_length=128, verbose_name="Titre"),
+                ),
+                (
+                    "description",
+                    models.TextField(
+                        blank=True, max_length=5000, verbose_name="Description"
+                    ),
+                ),
+                (
+                    "image",
+                    models.ImageField(
+                        blank=True,
+                        null=True,
+                        upload_to="./",
+                        verbose_name="image",
+                    ),
+                ),
+                (
+                    "rating",
+                    models.PositiveSmallIntegerField(
+                        validators=[
+                            django.core.validators.MinValueValidator(0),
+                            django.core.validators.MaxValueValidator(5),
+                        ]
+                    ),
+                ),
+                ("headline", models.CharField(max_length=128)),
+                ("body", models.CharField(blank=True, max_length=8192)),
+                ("time_created", models.DateTimeField(auto_now_add=True)),
+                (
+                    "ticket",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="ticket_and_review.ticket",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

@@ -2,112 +2,130 @@
 {% block content %}
 <form method="post" enctype="multipart/form-data">
      <div class="ticket_review">
-            <p class="left_btn"><a href="{% url 'ticket_create' %}">
-                <button type="button" name='ticket'>Demander une critique</button></a>
+            <p class="left_btn"><a href=
+                "{% url 'ticket_create' %}" class="flux-btn">
+                Demander une critique</a>
             </p>
-
-            <p class="right_btn"><a href="{% url 'auto_review_create' %}">
-                <button type="button" name='review'>Créer une critique</button></a>
+            <p class="right_btn"><a href=
+                "{% url 'auto_review_create' %}" class="flux-btn">
+                Créer une critique</a>
             </p>
-
      </div>
     {% csrf_token %}
-     <div class="grid-container">
-
-        {% for post in posts %}
-            {% if post.content_type == 'TICKET' %}
-                <div class="post">
-                     <p class="date">{{ post.time_created }}</p>
-                    {% if post.user == request.user %}
-                        <p><strong>Vous</strong> avez demandé une critique</p>
-                    {% else %}
-                        <p><strong>{{ post.user }}</strong> a demandé une critique</p>
-                    {% endif %}
-                    <h4>{{ post.title }}</h4>
-                    <p class="content">{{ post.description | safe }}</p>
-                    {% if post.image %}
-                        <img src="{{ post.image.url }}">
-                    {% endif %}
-                    {% if post.user != request.user and post.review_existing == False %}
-                    <p class="ticket_review corner_btn"><a href="{% url 'review_create' post.id %}">
-                        <button type="button" name='review'>Créer une critique</button></a>
+    <div class="grid-container">
+    {% for post in posts %}
+        {% if post.content_type == 'TICKET' %}
+            <div class="post">
+                <p class="date">{{ post.time_created }}</p>
+                {% if post.user == request.user %}
+                    <p><strong>Vous</strong>
+                         avez demandé une critique</p>
+                {% else %}
+                    <p><strong>{{ post.user }}
+                        </strong> a demandé une critique</p>
+                {% endif %}
+                <h4>{{ post.title }}</h4>
+                <p class="content">{{ post.description | safe }}</p>
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="post-img">
+                {% endif %}
+                {% if post.user != request.user and post.review_existing == False %}
+                    <p class="ticket_review corner_btn">
+                        <a href="{% url 'review_create' post.id %}" class="flux-btn">
+                        Créer une critique</a>
                     </p>
-                     {% endif %}
-                </div>
-            {% elif post.content_type == 'REVIEW' %}
-                <div class="post">
-                    <p class="date">{{ post.time_created }}</p>
-                    {% if post.user == request.user %}
-                        <p><strong>Vous</strong> avez publié une critique</p>
-                    {% else %}
-                        <p><strong>{{ post.user }}</strong> a publié une critique</p>
                     {% endif %}
-                    <div class="title-review-&-rating">
-                        <div class="title-review"> <h4>{{ post.headline }}</h4></div>
-                        {% if post.rating == 0 %}
-                            <div class="rating"><p> - &#9734;&#9734;&#9734;&#9734;&#9734;<p></div>
-                        {% elif post.rating == 1 %}
-                            <div class="rating"><p> - &#9733;&#9734;&#9734;&#9734;&#9734;<p></div>
-                        {% elif post.rating == 2 %}
-                            <div class="rating"><p> - &#9733;&#9733;&#9734;&#9734;&#9734;<p></div>
-                        {% elif post.rating == 3 %}
-                            <div class="rating"><p> - &#9733;&#9733;&#9733;&#9734;&#9734;<p></div>
-                        {% elif post.rating == 4 %}
-                            <div class="rating"><p> - &#9733;&#9733;&#9733;&#9733;&#9734;<p></div>
-                        {% elif post.rating == 5 %}
-                            <div class="rating"><p> - &#9733;&#9733;&#9733;&#9733;&#9733;<p></div>
-                        {% endif %}
-                    </div>
-                    <p class="content comment">{{ post.body | safe }}</p>
-                    <div class="ticket_in_review">
-                        <p class="date">{{ post.ticket.time_created }}</p>
-                        {% if post.ticket.user == request.user %}
-                            <p>Ticket - <strong>Vous</strong></p>
-                        {% else %}
-                            <p>Ticket - <strong>{{ post.ticket.user }}</strong></p>
-                        {% endif %}
-                        <p>{{ post.ticket.title }}</p>
-                        <p>{{ post.ticket.description }}</p>
-                        {% if post.ticket.image %}
-                            <img src="{{ post.ticket.image.url }}">
-                        {% endif %}
-                    </div>
+            </div>
+        {% elif post.content_type == 'REVIEW' %}
+            <div class="post">
+                <p class="date">{{ post.time_created }}</p>
+                {% if post.user == request.user %}
+                    <p><strong>Vous</strong>
+                         avez publié une critique</p>
+                {% else %}
+                    <p><strong>{{ post.user }}</strong>
+                         a publié une critique</p>
+                {% endif %}
+                <div class="title-review-and-rating">
+                    <div class="title-review"> <h4>{{ post.headline }}</h4></div>
+                    {% if post.rating == 0 %}
+                        <div class="rating">
+                            <p> - &#9734;&#9734;&#9734;&#9734;&#9734;<p></div>
+                    {% elif post.rating == 1 %}
+                        <div class="rating">
+                            <p> - &#9733;&#9734;&#9734;&#9734;&#9734;<p></div>
+                    {% elif post.rating == 2 %}
+                        <div class="rating">
+                            <p> - &#9733;&#9733;&#9734;&#9734;&#9734;<p></div>
+                    {% elif post.rating == 3 %}
+                        <div class="rating">
+                            <p> - &#9733;&#9733;&#9733;&#9734;&#9734;<p></div>
+                    {% elif post.rating == 4 %}
+                        <div class="rating">
+                            <p> - &#9733;&#9733;&#9733;&#9733;&#9734;<p></div>
+                    {% elif post.rating == 5 %}
+                        <div class="rating">
+                            <p> - &#9733;&#9733;&#9733;&#9733;&#9733;<p></div>
+                    {% endif %}
                 </div>
-            {% elif post.content_type == 'AUTOREVIEW' %}
-                <div class="post">
-                     <p class="date">{{ post.time_created }}</p>
-                     <p><strong>Vous</strong> avez publié une critique</p>
-                    <div class="title-review-&-rating">
-                        <div class="title-review"> <h4>{{ post.headline }}</h4></div>
-                        {% if post.rating == 0 %}
-                            <div class="rating"><p> - &#9734;&#9734;&#9734;&#9734;&#9734;<p></div>
-                        {% elif post.rating == 1 %}
-                            <div class="rating"><p> - &#9733;&#9734;&#9734;&#9734;&#9734;<p></div>
-                        {% elif post.rating == 2 %}
-                            <div class="rating"><p> - &#9733;&#9733;&#9734;&#9734;&#9734;<p></div>
-                        {% elif post.rating == 3 %}
-                            <div class="rating"><p> - &#9733;&#9733;&#9733;&#9734;&#9734;<p></div>
-                        {% elif post.rating == 4 %}
-                            <div class="rating"><p> - &#9733;&#9733;&#9733;&#9733;&#9734;<p></div>
-                        {% elif post.rating == 5 %}
-                            <div class="rating"><p> - &#9733;&#9733;&#9733;&#9733;&#9733;<p></div>
-                        {% endif %}
-                    </div>
-                    <p class="comment2">{{ post.body | safe }}</p>
-                    <div class="ticket_in_review">
-                        <p class="date">{{ post.ticket.time_created }}</p>
+                <p class="content comment">{{ post.body | safe }}</p>
+                <div class="ticket_in_review">
+                    <p class="date">{{ post.ticket.time_created }}</p>
+                    {% if post.ticket.user == request.user %}
                         <p>Ticket - <strong>Vous</strong></p>
-                        <p>{{ post.ticket.title }}</p>
-                        <p>{{ post.ticket.description }}</p>
-                        {% if post.ticket.image %}
-                            <img src="{{ post.ticket.image.url }}">
-                        {% endif %}
-                    </div>
+                    {% else %}
+                        <p>Ticket - <strong>
+                            {{ post.ticket.user }}</strong></p>
+                    {% endif %}
+                    <p>{{ post.ticket.title }}</p>
+                    <p>{{ post.ticket.description }}</p>
+                    {% if post.ticket.image %}
+                        <img src=
+                            "{{ post.ticket.image.url }}" alt="post-img">
+                    {% endif %}
                 </div>
-            {% endif %}
-
-        {% endfor %}
-    </div>
+            </div>
+        {% elif post.content_type == 'AUTOREVIEW' %}
+            <div class="post">
+                <p class="date">{{ post.time_created }}</p>
+                <p><strong>Vous</strong> avez publié une critique</p>
+                <div class="title-review-and-rating">
+                    <div class="title-review"> <h4>{{ post.headline }}</h4></div>
+                    {% if post.rating == 0 %}
+                        <div class="rating">
+                            <p> - &#9734;&#9734;&#9734;&#9734;&#9734;<p></div>
+                    {% elif post.rating == 1 %}
+                        <div class="rating">
+                            <p> - &#9733;&#9734;&#9734;&#9734;&#9734;<p></div>
+                    {% elif post.rating == 2 %}
+                        <div class="rating">
+                            <p> - &#9733;&#9733;&#9734;&#9734;&#9734;<p></div>
+                    {% elif post.rating == 3 %}
+                        <div class="rating">
+                            <p> - &#9733;&#9733;&#9733;&#9734;&#9734;<p></div>
+                    {% elif post.rating == 4 %}
+                        <div class="rating">
+                            <p> - &#9733;&#9733;&#9733;&#9733;&#9734;<p></div>
+                    {% elif post.rating == 5 %}
+                        <div class="rating">
+                            <p> - &#9733;&#9733;&#9733;&#9733;&#9733;<p></div>
+                    {% endif %}
+                </div>
+                <p class="comment2">{{ post.body | safe }}</p>
+                <div class="ticket_in_review">
+                    <p class="date">{{ post.ticket.time_created }}</p>
+                    <p>Ticket - <strong>Vous</strong></p>
+                    <p>{{ post.ticket.title }}</p>
+                    <p>{{ post.ticket.description }}</p>
+                    {% if post.ticket.image %}
+                        <img src=
+                            "{{ post.ticket.image.url }}" alt="post-img">
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
 </form>
 <div class="trait"><hr></div>
 {% endblock content %}

@@ -1,25 +1,26 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <title>LITReview</title>
-        <link rel="stylesheet" href="{% static 'bookreviews/style.css' %}">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    </head>
-    <body>
-        <header>
-            <!-- MENU-->
-            <nav>
-                <ul class="liste-objets">
-                    <li id="logo"><img src="{% static 'bookreviews/logo_orange.png' %}" alt="logo"></li>
-                    <li id="nom">LITReview</li>
-                </ul>
-            </nav>
-         </header>
-        <div class="trait"><hr></div>
-        {% block content %}{% endblock content %}
+<head>
+    <title>LITReview</title>
+    <link rel="stylesheet" href="{% static 'bookreviews/style.css' %}">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <header>
+        <!-- MENU-->
+        <nav>
+            <ul class="liste-objets">
+                <li id="logo"><img src=
+                    "{% static 'bookreviews/logo_orange.png' %}" alt="logo"></li>
+                <li id="nom">LITReview</li>
+            </ul>
+        </nav>
+    </header>
+    <div class="trait"><hr></div>
+    {% block content %}{% endblock content %}
         {% if user.is_authenticated %}
-        {% endif %}
-        <div class="trait"><hr></div>
-    </body>
+    {% endif %}
+    <div class="trait"><hr></div>
+</body>
 </html>

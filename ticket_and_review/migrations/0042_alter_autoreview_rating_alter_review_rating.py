@@ -7,18 +7,30 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ticket_and_review', '0041_alter_review_rating'),
+        ("ticket_and_review", "0041_alter_review_rating"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='autoreview',
-            name='rating',
-            field=models.PositiveSmallIntegerField(max_length=1024, validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(5)]),
+            model_name="autoreview",
+            name="rating",
+            field=models.PositiveSmallIntegerField(
+                max_length=1024,
+                validators=[
+                    django.core.validators.MinValueValidator(0),
+                    django.core.validators.MaxValueValidator(5),
+                ],
+            ),
         ),
         migrations.AlterField(
-            model_name='review',
-            name='rating',
-            field=models.PositiveSmallIntegerField(max_length=1024, validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(5)]),
+            model_name="review",
+            name="rating",
+            field=models.PositiveSmallIntegerField(
+                max_length=1024,
+                validators=[
+                    django.core.validators.MinValueValidator(0),
+                    django.core.validators.MaxValueValidator(5),
+                ],
+            ),
         ),
     ]

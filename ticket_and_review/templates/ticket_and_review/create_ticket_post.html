@@ -5,13 +5,13 @@
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ ticket_form.as_p }}
-             <p class="image_txt">Image</p>
-             <br><br>
-             <div class="fake-btn2">
-                 <p>Télécharger fichier</p>
-             </div>
+            <p class="image_txt">Image</p>
+            <br><br>
+            <div class="fake-btn2">
+                <p>Télécharger fichier</p>
+            </div>
             <div class="save">
-                <button class="save-btn1" type="submit" >Envoyer</button>
+                <button class="save-btn1" type="submit">Envoyer</button>
             </div>
         </form>
     </div>

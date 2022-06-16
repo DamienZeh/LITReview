@@ -6,14 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ticket_and_review', '0007_photo_caption'),
+        ("ticket_and_review", "0007_photo_caption"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='blog',
-            name='content',
-            field=models.CharField(default='rffe', max_length=5000, verbose_name='contenu'),
+            model_name="blog",
+            name="content",
+            field=models.CharField(
+                default="rffe", max_length=5000, verbose_name="contenu"
+            ),
             preserve_default=False,
         ),
     ]

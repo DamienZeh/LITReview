@@ -8,33 +8,44 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ticket_and_review', '0039_alter_autoreview_rating'),
+        ("ticket_and_review", "0039_alter_autoreview_rating"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='autoreview',
-            name='body',
+            model_name="autoreview",
+            name="body",
             field=models.TextField(blank=True, max_length=8192),
         ),
         migrations.AlterField(
-            model_name='review',
-            name='body',
+            model_name="review",
+            name="body",
             field=models.TextField(blank=True, max_length=8192),
         ),
         migrations.AlterField(
-            model_name='review',
-            name='rating',
-            field=models.PositiveSmallIntegerField(max_length=1024, validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(5)]),
+            model_name="review",
+            name="rating",
+            field=models.PositiveSmallIntegerField(
+                max_length=1024,
+                validators=[
+                    django.core.validators.MinValueValidator(0),
+                    django.core.validators.MaxValueValidator(5),
+                ],
+            ),
         ),
         migrations.AlterField(
-            model_name='review',
-            name='ticket',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ticket_and_review.ticket'),
+            model_name="review",
+            name="ticket",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="ticket_and_review.ticket",
+            ),
         ),
         migrations.AlterField(
-            model_name='ticket',
-            name='description',
-            field=models.TextField(blank=True, max_length=2048, verbose_name='Description'),
+            model_name="ticket",
+            name="description",
+            field=models.TextField(
+                blank=True, max_length=2048, verbose_name="Description"
+            ),
         ),
     ]

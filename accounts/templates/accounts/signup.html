@@ -1,28 +1,25 @@
 {% extends 'accounts/base.html' %}
 {% block content %}
 {% if form.errors %}
-   {{ form.errors }}
+    {{ form.errors }}
 {% endif %}
 <div class="errorlist">{{ message }}</div>
 <div id="subscribe">
-<form method="post">
-     {% csrf_token %}
-    <div class="signup">
-        <div class="connexion_ids">
-            <p>Inscrivez-vous</p>
-            <p>{{ form.username }}</p>
-            <p>{{ form.password1 }}</p>
-            <p>{{ form.password2 }}</p>
-            <div class="connexion_btn">
-                <a href="{% url 'login' %}"><button type="button" name='back_main'>Retourner</button></a>
-                <button type="submit" >S’inscrire</button>
+    <form method="post">
+        {% csrf_token %}
+        <div class="signup">
+            <div class="connexion_ids">
+                <p>Inscrivez-vous</p>
+                <p>{{ form.username }}</p>
+                <p>{{ form.password1 }}</p>
+                <p>{{ form.password2 }}</p>
+                <div class="connexion_btn">
+                    <a href="{% url 'login' %}" 
+                        class="btn-back">Retourner</a>
+                    <button type="submit">S’inscrire</button>
+                </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
 </div>
 {% endblock content %}
-
-< !--<a href="{% url 'login' %}" id='back_main'>Retourner</a>-->
-< !--<button type="submit"  id='back_main'><a href="{% url 'login' %}">Retourner</button>-->
-< !--<a href="{% url 'login' %}"><button type="submit" name='back_main'>Retourner</button></a>-->

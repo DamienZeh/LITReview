@@ -7,15 +7,16 @@
                 {% csrf_token %}
                 <p>Vous êtes en train de poster en réponse à</p>
                 <div class="ticket_in_review">
-                        <p class="date">{{ post.time_created }}</p>
-                        <p>Ticket - <strong>Vous</strong></p>
-                        <p>{{ post.ticket.title }}</p>
-                        <p>{{ post.ticket.description }}</p>
-                        {% if post.ticket.image %}
-                            <img src="{{ post.ticket.image.url }}">
-                        {% endif %}
+                    <p class="date">{{ post.time_created }}</p>
+                    <p>Ticket - <strong>Vous</strong></p>
+                    <p>{{ post.ticket.title }}</p>
+                    <p>{{ post.ticket.description }}</p>
+                    {% if post.ticket.image %}
+                        <img src="{{ post.ticket.image.url }}" alt=
+                            "ticket-img">
+                    {% endif %}
                 </div>
-                  <br>
+                <br>
                 <div class="trait3"><hr></div>
                 <p class="onglet">Critique</p>
                 <p>Titre</p>
@@ -27,7 +28,8 @@
                 <p>Commentaire</p>
                 <p class="champs">{{ edit_form.body }}</p>
                 <div class="save">
-                    <button class="save-btn2" type="submit" >Envoyer</button>
+                    <button class="save-btn2" type=
+                        "submit">Envoyer</button>
                 </div>
             </div>
         </div>

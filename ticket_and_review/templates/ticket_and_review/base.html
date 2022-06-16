@@ -1,28 +1,36 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="fr">
     <head>
         <title>LITReview</title>
-        <link rel="stylesheet" href="{% static 'ticket_and_review/style.css' %}">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href=
+            "{% static 'ticket_and_review/style.css' %}">
+        <meta http-equiv="Content-Type" content=
+            "text/html; charset=UTF-8" />
     </head>
     <body>
         <header>
             <!-- MENU-->
             <nav>
                 <ul class="liste-objets">
-                    <li id="logo"><img src="{% static 'ticket_and_review/logo_orange.png' %}" alt="logo"></li>
+                    <li id="logo"><img src=
+                        "{% static 'ticket_and_review/logo_orange.png' %}" alt=
+                        "logo"></li>
                     <li id="nom">LITReview</li>
                     <li id="espace"></li>
-                    <li class="objets"><a href="{% url 'flux' %}">Flux</a></li>
-                    <li class="objets"><a href="{% url 'posts' %}">Posts</a></li>
-                    <li class="objets"><a href="{% url 'subscription' %}">Abonnements</a></li>
-                    <li class="objets"><a href="{% url 'logout' %}">Se déconnecter</a></li>
+                    <li class="objets"><a href=
+                        "{% url 'flux' %}">Flux</a></li>
+                    <li class="objets"><a href=
+                        "{% url 'posts' %}">Posts</a></li>
+                    <li class="objets"><a href=
+                        "{% url 'subscription' %}">Abonnements</a></li>
+                    <li class="objets"><a href=
+                        "{% url 'logout' %}">Se déconnecter</a></li>
                 </ul>
             </nav>
          </header>
         {% if user.is_authenticated %}
-        <p id="id_connect">Connecté en tant que <strong>{{ request.user }}</strong></p>
+            <p id="id_connect">Connecté en tant que <strong>{{ request.user }}</strong></p>
         {% endif %}
         <div class="trait"><hr></div>
         {% block content %}{% endblock content %}

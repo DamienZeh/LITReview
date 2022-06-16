@@ -1,22 +1,24 @@
-*{
-  font-family:"Verdana", "Arial", "Arial Black", Arial, Verdana, sans-serif;
-  text-decoration: none;
+* {
+    font-family: "Verdana", "Arial", "Arial Black", Arial, Verdana, sans-serif;
+    text-decoration: none;
 }
-body
-{
-    background-image: linear-gradient(to bottom right, rgb(150,178,174), rgb(49,58,57));
+
+body {
+    background-image: linear-gradient(to bottom right, rgb(150, 178, 174), rgb(49, 58, 57));
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
-a{
-  color: white;
-  font-size: 22px;
+
+a {
+    color: white;
+    font-size: 22px;
 }
+
 .invisible {
-   padding: 0px;
-   z-index: 1;
-   position: relative;
-   top: 10px;
+    padding: 0px;
+    z-index: 1;
+    position: relative;
+    top: 10px;
 }
 
 /* MENU */
@@ -26,25 +28,28 @@ nav {
     position: relative;
     width: 100%;
     height: 70px;
-    background: linear-gradient(90deg, rgb(35, 18, 8),  rgb(99, 84, 77), #1f1f1f);
+    background: linear-gradient(90deg, rgb(35, 18, 8), rgb(99, 84, 77), #1f1f1f);
     color: white;
     border-radius: 20px;
 }
+
 .liste-objets #nom {
     color: white;
     padding-right: 30px;
     font-size: 22px;
     margin-top: 8px;
 }
+
 .liste-objets img {
     height: 40px;
     padding-right: 20px;
     vertical-align: middle;
     margin-top: 12px;
 }
+
 .liste-objets {
     display: block;
-    display:flex;
+    display: flex;
     margin-left: auto;
     margin-right: auto;
     list-style-type: none;
@@ -52,15 +57,17 @@ nav {
     line-height: 50px;
     font-size: 20px;
     justify-content: center;
-    vertical-align: center;
 }
-.liste-objets a{
+
+.liste-objets a {
     font-size: 15px;
 }
-.liste-objets #espace{
-    width:20px;
+
+.liste-objets #espace {
+    width: 20px;
     padding-right: 30px;
 }
+
 .objets {
     cursor: pointer;
     margin-top: 8px;
@@ -68,6 +75,7 @@ nav {
     margin-left: 70px;
     position: relative;
 }
+
 /* FIN MENU */
 
 /* flux page & other */
@@ -76,82 +84,118 @@ nav {
     margin-right: 70px;
     color: white;
 }
-.trait{
+
+.trait {
     margin: 40px;
-    width:464px;
-    height:1px;
-    overflow:hidden;
+    width: 464px;
+    height: 1px;
+    overflow: hidden;
     background-color: white;
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
-    display:flex;
+    display: flex;
 }
-.trait2{
+
+.trait2 {
     position: relative;
     margin: 5px;
-    width:540px;
-    height:1px;
+    width: 540px;
+    height: 1px;
     top: -17px;
-    overflow:hidden;
+    overflow: hidden;
     background-color: grey;
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
-    display:flex;
+    display: flex;
 }
-.trait3{
+
+.trait3 {
     position: relative;
     margin: 5px;
-    width:540px;
-    height:1px;
+    width: 540px;
+    height: 1px;
     top: -5px;
-    overflow:hidden;
+    overflow: hidden;
     background-color: grey;
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
-    display:flex;
+    display: flex;
 }
-.errorlist{
+
+.errorlist {
     text-align: left;
-    overflow:hidden;
+    overflow: hidden;
     font-weight: bold;
     padding-top: 0px;
     padding-bottom: 0px;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    color:black;
+    color: black;
     font-size: 17px
 }
-.ticket_review button{
+
+.ticket_review button {
     color: black;
     font-size: 14px;
     width: 210px;
     height: 35px;
     border-radius: 7px;
-    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.1);
-    border:  0.9mm solid  rgb(110, 44, 6);
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    border: 0.9mm solid rgb(110, 44, 6);
     cursor: pointer;
     text-align: center;
 }
-.ticket_review button:hover{
-    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.4), 0 6px 20px 0 rgba(0,0,0,0.25);
+
+.flux-btn {
+    width: 130px;
+}
+
+.post-btn {
+    width: 100px;
+}
+
+.flux-btn,
+.post-btn {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: black;
+    font-size: 14px;
+    height: 20px;
+    border-radius: 7px;
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    border: 0.9mm solid rgb(110, 44, 6);
+    background-color: white;
+    text-align: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.ticket_review button:hover {
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
     background-color: black;
-    border:  0.9mm solid  rgb(102, 2, 28);
+    border: 0.9mm solid rgb(102, 2, 28);
     color: white;
 }
-.ticket_review{
+
+.ticket_review {
     justify-content: center;
-    display:flex;
+    display: flex;
 }
-.ticket_review .left_btn{
+
+.ticket_review .left_btn {
     padding-right: 50px;
 }
-.ticket_review .right_btn{
+
+.ticket_review .right_btn {
     padding-left: 50px;
 }
+
 .post {
     min-height: 150px;
 
@@ -160,86 +204,103 @@ nav {
     margin-right: auto;
     padding: 5px 20px 5px 20px;
     border-radius: 7px;
-    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.1);
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
     margin-top: 10px;
-    background-image: linear-gradient(to bottom right, white, rgb(208,213,212));
+    background-image: linear-gradient(to bottom right, white, rgb(208, 213, 212));
 }
+
 .post .date {
     margin-top: 5px;
     float: right;
     font-size: 0.9em;
 }
+
 .post .content {
     margin-top: 15px;
     overflow: hidden;
 }
+
 .post .comment2 {
     position: relative;
-    top:-10px;
+    top: -10px;
     margin: 0px;
     padding-top: 0px;
 }
-.post h4{
+
+.post h4 {
     margin-top: 10px;
     padding-top: 10px;
     margin-bottom: 10px;
 }
+
 .post img {
     margin-bottom: 5px;
 }
+
 .publish {
-   text-align:right;
-   margin-bottom: 5px;
+    text-align: right;
+    margin-bottom: 5px;
 }
-.ticket_review .btn{
+
+.ticket_review .btn {
     color: black;
     font-size: 14px;
     width: 110px;
     height: 35px;
     border-radius: 7px;
-    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.1);
-    border:  0.9mm solid  rgb(110, 44, 6);
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    border: 0.9mm solid rgb(110, 44, 6);
     cursor: pointer;
     text-align: center;
 }
-.btn:hover{
-    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.4), 0 6px 20px 0 rgba(0,0,0,0.25);
+
+.btn:hover {
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
     background-color: black;
-    border:  0.9mm solid  rgb(102, 2, 28);
+    border: 0.9mm solid rgb(102, 2, 28);
     color: white;
 }
+
 .post h2 {
     text-align: center;
 }
+
 .create_autoreview h2 {
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
 .create_autoreview p {
     margin-top: 5px;
     margin-bottom: 13px;
 }
+
 .none_posts {
     text-align: center;
     color: white;
     font-weight: bold;
 }
-.title-review-&-rating {
+
+.title-review-and-rating {
     display: block;
     justify-content: space-between;
 }
+
 .title-review {
-    float:left;
+    float: left;
     margin-right: 7px;
 }
-.title-review h4{
+
+.title-review h4 {
     padding-top: 0px;
-     margin-top: 4px;
+    margin-top: 4px;
 }
-.rating p{
+
+.rating p {
     padding-top: 2px;
 }
+
 /* Fin flux page & other */
 
 /* posts page */
@@ -248,65 +309,90 @@ nav {
     padding-top: 0px;
     justify-content: right;
 }
+
 .modif_sup_btn {
     justify-content: right;
-    display:flex;
+    display: flex;
 }
-.modif_sup_btn .modif_btn{
+
+.modif_sup_btn .modif_btn {
     padding-right: 5px;
     padding-left: 5px;
 }
-.modif_sup_btn button{
-    width:100px;
+
+.modif_sup_btn button {
+    width: 100px;
     text-align: center;
 }
+
 /* Fin posts page */
 
 /* page modif et delete ticket */
-.save-btn1, .save-btn3 {
+
+.save-btn1,
+.save-btn3 {
     position: relative;
     top: -77px;
 }
+
 .save-btn2 {
     position: relative;
     top: -5px;
 }
-.save-btn1, .save-btn2, .save-btn3, .save-btn4, .delete-btn, .fake-btn, .fake-btn2, .fake-btn3{
+
+.save-btn1,
+.save-btn2,
+.save-btn3,
+.save-btn4,
+.delete-btn,
+.fake-btn,
+.fake-btn2,
+.fake-btn3 {
     color: black;
     font-size: 14px;
     width: 130px;
     height: 35px;
     border-radius: 7px;
-    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.1);
-    border:  0.9mm solid  rgb(110, 44, 6);
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    border: 0.9mm solid rgb(110, 44, 6);
     cursor: pointer;
     text-align: center;
     margin-bottom: 10px;
 }
+
 .save-btn3 {
     top: -10px;
 }
+
 .title {
     text-align: center;
     color: white;
 }
+
 .post-sup {
     text-align: center;
 }
+
 .save {
     text-align: right;
 }
-.fake-btn, .fake-btn2, .fake-btn3 {
+
+.fake-btn,
+.fake-btn2,
+.fake-btn3 {
     position: relative;
     top: -20px;
-    width:184px;
+    width: 184px;
     height: 30px;
     cursor: auto;
     background-color: white;
 }
-.fake-btn p, .fake-btn3 p{
+
+.fake-btn p,
+.fake-btn3 p {
     margin-top: 7px;
 }
+
 .fake-btn2 {
     position: relative;
     top: -121px;
@@ -315,103 +401,131 @@ nav {
     cursor: auto;
     pointer-events: none
 }
-.fake-btn2 p{
+
+.fake-btn2 p {
     margin-top: 7px;
 }
-.fake-btn3{
+
+.fake-btn3 {
     top: -45px;
     pointer-events: none
 }
+
 .django_btn {
     opacity: 0%;
     max-width: 180px;
 }
-.create_ticket input[type=file]{
+
+.create_ticket input[type=file] {
     margin-top: 30px;
 }
+
 .create_ticket {
     height: 500px;
 }
+
 .image_txt {
     position: relative;
     top: -77px;
 }
-p.onglet, p.onglet2{
+
+p.onglet,
+p.onglet2 {
     position: relative;
     top: -10px;
     margin-bottom: 0px;
     font-size: 14px;
     font-style: italic;
 }
-p.onglet{
+
+p.onglet {
     margin-top: 10px;
 }
-p.onglet2{
+
+p.onglet2 {
     margin-top: 15px;
 }
+
 .ticket_in_review {
-    border:  0.6mm solid  rgb(180, 175, 118);
+    border: 0.6mm solid rgb(180, 175, 118);
     background-color: rgba(230, 230, 230);
     border-radius: 7px;
     box-shadow: -1px 2px 10px 3px rgba(0, 0, 0, 0.15) inset;
-    padding:8px 13px 5px 13px;
+    padding: 8px 13px 5px 13px;
 }
+
 /* Fin page modif et delete ticket */
 
 /* page abonnement */
-.unfollow, .search, .followed {
+.unfollow,
+.search,
+.followed {
     font-size: 14px;
     width: 430px;
     height: 40px;
     border-radius: 7px;
     background-color: rgb(209, 205, 202);
-    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.1);
-    border:  0.9mm solid  rgb(90, 65, 48);
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    border: 0.9mm solid rgb(90, 65, 48);
     margin-top: 5px;
     margin-bottom: 5px;
     margin-right: auto;
     margin-left: auto;
 }
-.unfollow_user, .search_input, .followed_user {
+
+.unfollow_user,
+.search_input,
+.followed_user {
     float: left;
     margin-top: 10px;
     margin-left: 8px;
 }
-.unfollow_btn, .search_btn {
+
+.unfollow_btn,
+.search_btn {
     float: right;
 }
+
 .unfollow_btn {
     margin-top: 4px;
     margin-right: 8px;
 }
+
 .search_btn {
     margin-top: 5px;
     margin-right: 8px;
 }
-.search_btn, .unfollow_btn button {
+
+.search_btn,
+.unfollow_btn button {
     color: black;
     font-size: 14px;
     width: 110px;
     height: 31px;
     border-radius: 7px;
-    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.1);
-    border:  0.9mm solid  rgb(110, 44, 6);
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    border: 0.9mm solid rgb(110, 44, 6);
     cursor: pointer;
     text-align: center;
 }
-.search_btn:hover{
-    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.4), 0 6px 20px 0 rgba(0,0,0,0.25);
+
+.search_btn:hover {
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
     background-color: black;
-    border:  0.9mm solid  rgb(102, 2, 28);
+    border: 0.9mm solid rgb(102, 2, 28);
     color: white;
 }
-.unfollow_btn button:hover{
-    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.4), 0 6px 20px 0 rgba(0,0,0,0.25);
+
+.unfollow_btn button:hover {
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
     background-color: black;
-    border:  0.9mm solid  rgb(102, 2, 28);
+    border: 0.9mm solid rgb(102, 2, 28);
     color: white;
 }
+
+.unfollow a {
+    position: relative;
+    top: 7px;
+}
+
 /* fin page abonnement */
-
-
-

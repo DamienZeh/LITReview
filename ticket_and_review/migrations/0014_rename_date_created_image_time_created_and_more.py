@@ -6,22 +6,25 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ticket_and_review', '0013_rename_photo_image_rename_photo_ticket_image'),
+        (
+            "ticket_and_review",
+            "0013_rename_photo_image_rename_photo_ticket_image",
+        ),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='image',
-            old_name='date_created',
-            new_name='time_created',
+            model_name="image",
+            old_name="date_created",
+            new_name="time_created",
         ),
         migrations.RenameField(
-            model_name='ticket',
-            old_name='date_created',
-            new_name='time_created',
+            model_name="ticket",
+            old_name="date_created",
+            new_name="time_created",
         ),
         migrations.RemoveField(
-            model_name='ticket',
-            name='starred',
+            model_name="ticket",
+            name="starred",
         ),
     ]

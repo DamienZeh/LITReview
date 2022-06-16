@@ -20,7 +20,7 @@
         {% for followed in users_followed %}
             <div class="unfollow">
                 <div class="unfollow_user"> {{ followed.followed_user }}</div>
-                <div class="unfollow_btn"><a href="{% url 'unfollow' followed.id %}"><button type="submit" >Désabonner</button></a></div>
+                <div class="unfollow_btn"><a href="{% url 'unfollow' followed.id %}" class="post-btn">Désabonner</a></div>
             </div>
         {% endfor %}
         <br>
