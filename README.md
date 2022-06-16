@@ -1,7 +1,7 @@
 
 # Gestionnaire de demandes et critiques de livres
 
-![Alt text](https://github.com/DamienZeh/LITReview/accounts/static/bookreviews/logo.png)<br>
+![Alt text](https://github.com/DamienZeh/LITReview/blob/main/accounts/static/bookreviews/logo.png)<br>
 - Projet permettant de créer et gérer des publications,<br>
  pour demander des avis sur des livres et créer des critiques de ceux-ci.<br/>
  Il fonctionne sur un serveur local.<br><br>
