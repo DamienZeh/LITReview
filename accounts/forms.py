@@ -20,7 +20,9 @@ class SignupForm(UserCreationForm):
     )
     password2 = forms.CharField(
         max_length=63,
-        widget=forms.PasswordInput(attrs={"placeholder": "Confirmer mot de passe"}),
+        widget=forms.PasswordInput(
+            attrs={"placeholder": "Confirmer mot de passe"}
+        ),
         label="Mot de passe",
     )
 

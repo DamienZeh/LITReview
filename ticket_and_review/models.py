@@ -11,7 +11,9 @@ class Ticket(models.Model):
     description = models.TextField(
         max_length=2048, verbose_name="Description", blank=True
     )
-    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE
+    )
     image = models.ImageField(
         null=True, blank=True, verbose_name="image", upload_to="./"
     )
@@ -51,7 +53,9 @@ class Review(models.Model):
     rating = models.PositiveSmallIntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(5)]
     )
-    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE
+    )
     headline = models.CharField(max_length=128)
     body = models.TextField(max_length=8192, blank=True)
     time_created = models.DateTimeField(auto_now_add=True)
@@ -73,7 +77,9 @@ class AutoReview(models.Model):
     )
     headline = models.CharField(max_length=128)
     body = models.TextField(max_length=8192, blank=True)
-    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE
+    )
     time_created = models.DateTimeField(auto_now_add=True)
     IMAGE_MAX_SIZE = (200, 200)
 

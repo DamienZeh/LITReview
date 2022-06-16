@@ -13,7 +13,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="blog",
             name="description",
-            field=models.TextField(max_length=5000, verbose_name="Description"),
+            field=models.TextField(
+                max_length=5000, verbose_name="Description"
+            ),
         ),
         migrations.AlterField(
             model_name="blog",

@@ -84,8 +84,6 @@ Le fichier db.sqlite3 déjà présent, contient, pour l'exemple des utilisateurs
 - Pour des raisons de simplicité pour ces exemples,<br> ils ont tous le même mot de passe... ``password`` ;<br><br>
 
 ### Vérification du code
-
-- installez flake8 : ``pip install flake8`` ;<br>
 - Pour faire un contrôle du code avec **flake8** (avec max lenght à 79), tapez :<br/>
 ``flake8 --max-line-length 79 --exclude=env`` ;<br/><br/>
 

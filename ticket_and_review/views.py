@@ -18,16 +18,22 @@ def get_posts(request):
     users_followed = []
     for user in UserFollows.objects.filter(user=request.user):
         users_followed.append(user.followed_user)
-    tickets = Ticket.objects.filter(Q(user=request.user) | Q(user__in=users_followed))
+    tickets = Ticket.objects.filter(
+        Q(user=request.user) | Q(user__in=users_followed)
+    )
     reviews = Review.objects.filter(
-        Q(user=request.user) | Q(ticket__user=request.user) | Q(user__in=users_followed)
+        Q(user=request.user)
+        | Q(ticket__user=request.user)
+        | Q(user__in=users_followed)
     )
     auto_reviews = AutoReview.objects.filter(
         Q(user=request.user) | Q(user__in=users_followed)
     )
     tickets = tickets.annotate(content_type=Value("TICKET", CharField()))
     reviews = reviews.annotate(content_type=Value("REVIEW", CharField()))
-    auto_reviews = auto_reviews.annotate(content_type=Value("AUTOREVIEW", CharField()))
+    auto_reviews = auto_reviews.annotate(
+        content_type=Value("AUTOREVIEW", CharField())
+    )
     all_posts = sorted(
         chain(reviews, tickets, auto_reviews),
         key=lambda post: post.time_created,
@@ -42,7 +48,9 @@ def flux_page(request):
     get all posts from get_posts() and goes in flux page.
     """
     posts = get_posts(request)
-    return render(request, "ticket_and_review/flux.html", context={"posts": posts})
+    return render(
+        request, "ticket_and_review/flux.html", context={"posts": posts}
+    )
 
 
 @login_required
@@ -51,7 +59,9 @@ def posts_page(request):
     get all posts from get_posts() and goes in posts page.
     """
     posts = get_posts(request)
-    return render(request, "ticket_and_review/posts.html", context={"posts": posts})
+    return render(
+        request, "ticket_and_review/posts.html", context={"posts": posts}
+    )
 
 
 @login_required
@@ -68,7 +78,9 @@ def ticket_creation(request):
             ticket.save()
             return redirect("flux")
     context = {"ticket_form": ticket_form}
-    return render(request, "ticket_and_review/create_ticket_post.html", context=context)
+    return render(
+        request, "ticket_and_review/create_ticket_post.html", context=context
+    )
 
 
 @login_required
@@ -93,7 +105,9 @@ def review_creation(request, ticket_id):
         "review_form": review_form,
         "ticket": ticket,
     }
-    return render(request, "ticket_and_review/create_review_post.html", context=context)
+    return render(
+        request, "ticket_and_review/create_review_post.html", context=context
+    )
 
 
 @login_required
@@ -208,7 +222,9 @@ def edit_post(request, obj_id):
         html = "ticket_and_review/edit_review.html"
     edit_form = form(instance=obj)
     if request.method == "POST":
-        edit_form = form(request.POST or None, request.FILES or None, instance=obj)
+        edit_form = form(
+            request.POST or None, request.FILES or None, instance=obj
+        )
         if edit_form.is_valid():
             edit_form.save()
             return redirect("posts")
@@ -242,4 +258,6 @@ def delete_post(request, obj_id):
     context = {
         "delete_form": delete_form,
     }
-    return render(request, "ticket_and_review/delete_post.html", context=context)
+    return render(
+        request, "ticket_and_review/delete_post.html", context=context
+    )
