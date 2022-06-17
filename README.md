@@ -14,7 +14,7 @@
 - Avec votre terminal, allez dans le dossier ou vous souhaitez placer le projet.<br/> 
 Exemple : ``cd C:\Users\damie\Documents\Python_Project``
 - Copiez le projet : ``git clone https://github.com/DamienZeh/LITReview.git``
-- Puis, allez dans ce projet : ``cd LITReview-main\``
+- Puis, allez dans ce projet : ``cd LITReview\``
 - puis créez l’environnement virtuel avec  ``python -m venv env``<br/>
 	_(‘env’ est le nom que j’ai sur mon environnement virtuel, il est aussi noté dans le gitignore.)_
 - Puis activez le : ``.\env\Scripts\activate`` (pour windows)<br/>
