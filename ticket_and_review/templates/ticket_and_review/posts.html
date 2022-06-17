@@ -5,9 +5,6 @@
     {% csrf_token %}
 
     <div class="grid-container">
-        {% if post|length in posts  > 0 %}
-                <p class="none_posts">Vous n'avez rien publié pour l'instant.</p>
-        {% endif %}
         {% for post in posts %}
             {% if post.content_type == 'TICKET' and post.user == request.user %}
                 <div class="post">
