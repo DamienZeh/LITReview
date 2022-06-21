@@ -6,24 +6,24 @@
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p>Titre</p>
-            <p>{{ auto_review_form.title }}</p>
+            <p>{{ form_ticket.title }}</p>
             <p>Description</p>
-            <p>{{ auto_review_form.description }}</p>
+            <p>{{ form_ticket.description }}</p>
             <p>Image</p>
-            <p>{{ auto_review_form.image }}</p>
+            <p>{{ form_ticket.image }}</p>
             <div class="fake-btn3">
                 <p>Télécharger fichier</p>
             </div>
             <div class="trait2"><hr></div>
             <p class="onglet">Critique</p>
             <p>Titre</p>
-            <p class="champs">{{ auto_review_form.headline }}</p>
+            <p class="champs">{{ form_review.headline }}</p>
             <p>Note</p>
-            {% for rate in auto_review_form.rating %}
+            {% for rate in form_review.rating %}
                 {{ rate }}
             {% endfor %}
             <p>Commentaire</p>
-            <p class="champs">{{ auto_review_form.body }}</p>
+            <p class="champs">{{ form_review.body }}</p>
             <br>
             <div class="save">
                 <button class=

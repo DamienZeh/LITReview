@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Ticket, Review, AutoReview, UserFollows
+from .models import Ticket, Review, UserFollows
 
 
 class TicketAdmin(admin.ModelAdmin):
@@ -28,20 +28,6 @@ class ReviewAdmin(admin.ModelAdmin):
     )
 
 
-class AutoReviewAdmin(admin.ModelAdmin):
-    """Show ticket's info in admin"""
-
-    list_display = (
-        "title",
-        "description",
-        "image",
-        "headline",
-        "rating",
-        "body",
-        "time_created",
-    )
-
-
 class UserFollowsAdmin(admin.ModelAdmin):
     """Show userfollows's info in admin"""
 
@@ -50,5 +36,4 @@ class UserFollowsAdmin(admin.ModelAdmin):
 
 admin.site.register(Ticket, TicketAdmin)
 admin.site.register(Review, ReviewAdmin)
-admin.site.register(AutoReview, AutoReviewAdmin)
 admin.site.register(UserFollows, UserFollowsAdmin)

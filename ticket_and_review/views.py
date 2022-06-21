@@ -2,8 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.db.models import Q
-from .forms import TicketForm, DeletePostForm, ReviewForm, AutoReviewForm
-from .models import Ticket, UserFollows, Review, AutoReview
+from .forms import TicketForm, DeletePostForm, ReviewForm
+from .models import Ticket, UserFollows, Review
 from itertools import chain
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
@@ -26,16 +26,10 @@ def get_posts(request):
         | Q(ticket__user=request.user)
         | Q(user__in=users_followed)
     )
-    auto_reviews = AutoReview.objects.filter(
-        Q(user=request.user) | Q(user__in=users_followed)
-    )
     tickets = tickets.annotate(content_type=Value("TICKET", CharField()))
     reviews = reviews.annotate(content_type=Value("REVIEW", CharField()))
-    auto_reviews = auto_reviews.annotate(
-        content_type=Value("AUTOREVIEW", CharField())
-    )
     all_posts = sorted(
-        chain(reviews, tickets, auto_reviews),
+        chain(reviews, tickets),
         key=lambda post: post.time_created,
         reverse=True,
     )
@@ -115,26 +109,31 @@ def auto_review_creation(request):
     """
     Create autoreview (ticket + review).
     """
-    auto_review_form = AutoReviewForm()
+    form_ticket = TicketForm()
+    form_review = ReviewForm()
     if request.method == "POST":
-        auto_review_form = AutoReviewForm(request.POST, request.FILES)
-        if auto_review_form.is_valid():
-            auto_review = auto_review_form.save(commit=False)
+        form_ticket_post = TicketForm(request.POST, request.FILES)
+        form_review_post = ReviewForm(request.POST)
+        if form_ticket_post.is_valid() and form_review_post.is_valid():
+            review_form = form_review_post.save(commit=False)
+            ticket_form = form_ticket_post.save(commit=False)
             ticket = Ticket.objects.create(
-                title=auto_review.title,
-                description=auto_review.description,
+                title=ticket_form.title,
+                description=ticket_form.description,
                 user=request.user,
-                image=auto_review.image,
-                time_created=auto_review.time_created,
+                image=ticket_form.image,
+                time_created=ticket_form.time_created,
                 review_existing=True,
             )
-            auto_review.ticket = ticket
-            auto_review.user = request.user
-            auto_review.save()
+            review_form.ticket = ticket
+            review_form.user = request.user
 
+            ticket.save()
+            review_form.save()
             return redirect("flux")
     context = {
-        "auto_review_form": auto_review_form,
+        "form_ticket": form_ticket,
+        "form_review": form_review,
     }
     return render(
         request,
@@ -213,12 +212,8 @@ def edit_post(request, obj_id):
         form = TicketForm
         html = "ticket_and_review/edit_ticket.html"
     except Ticket.DoesNotExist:
-        try:
-            obj = Review.objects.get(id=obj_id)
-            form = ReviewForm
-        except Review.DoesNotExist:
-            obj = AutoReview.objects.get(id=obj_id)
-            form = ReviewForm  # if autoreview, we use ReviewForm too.
+        obj = Review.objects.get(id=obj_id)
+        form = ReviewForm
         html = "ticket_and_review/edit_review.html"
     edit_form = form(instance=obj)
     if request.method == "POST":
@@ -241,10 +236,7 @@ def delete_post(request, obj_id):
     try:
         obj = Ticket.objects.get(id=obj_id)
     except Ticket.DoesNotExist:
-        try:
-            obj = Review.objects.get(id=obj_id)
-        except Review.DoesNotExist:
-            obj = AutoReview.objects.get(id=obj_id)
+        obj = Review.objects.get(id=obj_id)
     delete_form = DeletePostForm()
     if request.method == "POST":
         delete_form = DeletePostForm(request.POST)

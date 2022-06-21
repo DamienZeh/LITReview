@@ -67,7 +67,7 @@
                         </div>
                     </div>
                 </div>
-                {% elif post.content_type == 'AUTOREVIEW' and post.user == request.user %}
+                {% elif post.content_type == 'REVIEW' and post.ticket.user == request.user %}
                 <div class="post">
                      <p class="date">{{ post.time_created }}</p>
                      <p><strong>Vous</strong> avez publié une critique</p>
